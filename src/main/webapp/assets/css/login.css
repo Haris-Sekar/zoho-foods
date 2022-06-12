@@ -1,0 +1,107 @@
+.loginContainer{ 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3% 0 0 0;
+}
+.loginContainer .login{
+    width: fit-content;
+    min-width: 650px;  
+    border-radius:20px;  
+    background: url("../images/loginFood.jpg");
+    background-size: cover;
+    transition: 0.3s ease-in-out;
+    background-position: center;
+}
+
+.loginContainer .login form{
+    background: rgba(0, 0, 0, 0.5);
+    border-radius:20px;  
+    transition: 0.3s ease-in-out;
+    padding: 0 0 5% 10%;
+    margin: none;
+
+}
+
+.loginContainer .login input[type = "text"],input[type = "password"]{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Rubik', sans-serif; 
+    margin: none;
+    padding: 10px;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px; 
+    border: none;
+}
+
+.loginContainer .login input:focus{
+    outline: none;
+    transition: 0.3s ease-in-out;
+    border-bottom: 4px solid #EE6C4D;
+}
+
+.loginContainer .login #text{
+    font-size: 35px;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    width: fit-content;
+    margin: none;
+    padding:10% 0;
+    color: #ffffff;
+}
+
+.loginContainer .login input[type=button]{
+    border: none;
+    background-color: #EE6C4D;
+    color: white;
+    font-size: 15px;
+    padding: 10px 20px;
+    /* min-width: 120px; */
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    margin: 2% 0 5% 0;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+.loginContainer .login input[type=submit]:hover{  
+    background-color: #293241; 
+}
+.loginContainer .login #forgetPass{
+    font-size: 17px; 
+    transition: 0.3s ease-in-out;
+    color: #ffffff;
+    text-decoration: underline;
+}
+.loginContainer .login #forgetPass:hover{
+    /* font-size: 17px;  */
+    color: #EE6C4D;
+}
+
+
+.loginContainer .login #signup{
+    font-size: 17px; 
+    transition: 0.3s ease-in-out;
+    color: #ffffff;
+    padding: 3% 0;
+}
+
+.loginContainer .login #showpassword{
+    font-size: 17px; 
+    transition: 0.3s ease-in-out;
+    color: #ffffff;
+    padding: 3% 0;
+
+    
+}
+
+
+.loginContainer .login input[type = "checkbox"]{
+    /* padding: 50%; */
+    margin: 3% 0;
+    width: 20px;
+    height: 15px;
+
+}

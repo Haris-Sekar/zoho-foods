@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho Food</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/loader.css">
+    <link rel="stylesheet" href="../assets/css/toast.css">
+    <link rel="stylesheet" href="../assets/css/cart.css">
+    <link rel="stylesheet" href="../assets/css/badge.css">
+</head>
+
+
+<body>
+    <div id="loading-wrapper" hidden>
+        <div id="loading-text">LOADING</div>
+        <div id="loading-content"></div>
+    </div>
+    <div class="orderSuccess" id="orderSuccess">
+        <div class="orderCon">
+            <div class="imgCon"><img src="../assets/images/success.png" alt=""></div>
+            <div class="successText">Order Successful</div>
+            <div class="successDesc">Your order has been placed successfully. We will contact you shortly.</div>
+           <div id="btnCenter"> <button id="successBtn">Continue</button></div>
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="logo">
+            <a href="../">
+                <img src="../assets/images/logo.png" alt="">
+            </a>
+        </div>
+        <div class="navContent">
+            <a href="./restaurant.html" class="navConText">Restaurants</a>
+            <a href="" class="navConText">Orders</a>
+            <a href="" class="navConText">Cart(<span id="cartNo">0</span>)</a>
+            <a href="" class="navConText">Account</a>
+            <div class="navConText" onclick="logout()">Logout</div>
+        </div>
+    </div>
+    <div class="cart">
+        <div class="cartItems" id="cartItems">
+        </div>
+        <div class="total">
+            <div class="resDetails">
+                <div class="imgCon"><img src="../assets/images/res.jpg" alt=""></div>
+                <div class="resDetails1">
+                    <div id="billResName" class="resName">Restaurant Name</div>
+                    <div id="billResAdd" class="resAddress">Address</div>
+                    <div id="billResType" class="resType">asdf</div>
+                </div>
+            </div>
+            <div id="text">Bill details</div>
+            <hr>
+            <div id="itemTot">
+                <div id="txt">Item Total</div>
+                <div id="totrate">0</div>
+            </div>
+            <div id="itemTot">
+                <div id="txt">Delivery Fee</div>
+                <div id="deliveryFee">0</div>
+            </div>
+            <div id="itemTot">
+                <div id="txt">Gst and charges</div>
+                <div id="gst">0</div>
+            </div>
+            <hr id="tot">
+            <div id="tot1">
+                <div id="txt">Grand Total</div>
+                <div id="Grate">0</div>
+            </div>
+            <button id="placeOrder" class="btnPlaceOrder">Place order</button>
+            <div id="totSave">
+                <div id="txt">Total save</div>
+                <div id="totSave1">0pih</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../assets/js/cart.js"></script>
+<script src="../assets/js/toast.js"></script>
+<script src="../assets/js/validation/user.js"></script>
+<script src="../assets/js/userLogout.js"></script>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Zoho Foods</title>
+	<link rel="stylesheet" href="../../assets/css/navbar.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="../../assets/css/food.css">
+	<link rel="stylesheet" href="../../assets/css/foodCard.css">
+	<link rel="stylesheet" href="../../assets/css/toast.css">
+</head>
+
+<body>
+	<div class="navbar">
+		<div class="logo">
+			<a href="../../">
+				<img src="../../assets/images/logoRes.png" alt="">
+			</a>
+		</div>
+		<div class="navContent">
+			<a href="" class="navConText">Foods</a>
+			<a href="" class="navConText">Orders</a>
+			<a href="" class="navConText">Review/Ratings</a>
+			<a href="" class="navConText">Account</a>
+			<div class="navConText" onclick="logout()">Logout</div>
+		</div>
+	</div>
+	<div class="foodContainer">
+		<div class="tabsContainer">
+			<div class="tab" onclick="displayFood()" id="allFoodTab">All Foods</div>
+			<div class="tab" onclick="displayAddFood()" id="addFoodTab">Add Food</div>
+			<div class="tab" onclick="displayAddCategory()" id="addCategoryTab">Food Category</div>
+		</div>
+		<div class="addFood" hidden id="addFood">
+			<form method="post" id="addFoodForm" enctype="multipart/form-data">
+				<div id="text">Add Food</div>
+				<input type="text" name="name" placeholder="Name" autocomplete="off" id="name" required>
+				<input type="text" name="desc" id="desc" placeholder="Description" autocomplete="off" required><br>
+
+				<input type="number" name="price" id="price" placeholder="Price" autocomplete="off" required>
+				<input type="number" name="discount" id="discount" placeholder="Discount" autocomplete="off" required
+					min="0" max="100">
+				<input type="number" name="stock" id="stock" placeholder="Stock" autocomplete="off" required>
+				<select name="category" id="addFoodCat">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select><br>
+				<input type="radio" name="resType" id="type" value="veg">
+				<label for="" id="sep">Veg</label>
+				<input type="radio" name="resType" id="type" value="nveg">
+				<label for="">Non-Veg</label><br><br>
+				<label for="" id="time">Food Start Time</label>
+				<label for="" id="time">Food End Time</label><br>
+				<input type="time" name="stime" id="stime">
+				<input type="time" name="etime" id="etime"><br>
+				<label for="" id="time1">Food Preparation Time</label>
+				<label for="" id="image">Food Images</label> <br>
+				<input type="number" name="prepTime" id="stime" placeholder="in minutes">
+				<input type="file" name="file" id="ajaxfile"><br>
+				<input type="button" value="Add Food" id="submit" onclick="foodAdd()"><br>
+
+
+			</form>
+		</div>
+		<!-- <img src="../../uploads/foodsPic/correct.png" alt="asdf"> 	 -->
+		<div class="categoryContainer" hidden id="addCategory">
+			<div class="addCategory">
+				<form method="post" id="catForm">
+					<div id="text">Food Category</div>
+					<p id="conDelete"></p>
+					<input type="text" name="name" placeholder="Name" autocomplete="off" id="catName" required
+						value=""><br>
+					<input type="text" value="" name="resEmail" placeholder="Name" autocomplete="off" id="resEmail"
+						hidden><br>
+					<input type="text" name="type" id="catType" value="insert" hidden>
+					<input type="number" name="id" id="catId" value="" hidden>
+					<input type="button" value="Add" id="catSubmit" onclick="addFoodCategory()">
+					<input type="button" value="Cancel" id="catCancel" onclick="catCancel1()" hidden><br>
+				</form>
+			</div>
+			<div class="allCategory">
+				<div class="tableCon">
+					<table id="categoryTable">
+						<tr>
+							<th>Category Name</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="allFoods" id="allFoods">
+			<div class="foods" id="renderFoods">
+				
+			</div>			
+		</div>
+
+		
+	</div>
+
+</body>
+
+</html>
+<script src="../../assets/js/toast.js"></script>
+<script src="../../assets/js/validation/restaurant.js"></script>
+<script src="../../assets/js/logout.js"></script>
+<script src="../../assets/js/foods.js"></script>
