@@ -31,10 +31,9 @@ public class PlaceOrder extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("orderId: " + orderId);
 		return orderId + 1;
 	}
-
-	private int orderId = getLastOderId();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,6 +46,8 @@ public class PlaceOrder extends HttpServlet {
 					+ userId;
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
+			int orderId = getLastOderId();
+			System.out.println("orderId: " + orderId);
 			while (rs.next()) {
 				float price = rs.getFloat("price") - (rs.getFloat("price") * rs.getInt("discount")) / 100;
 				String placeOrderQuery = "insert into orders (order_id,user_id,food_id,quantity,price) values ("
@@ -74,10 +75,6 @@ public class PlaceOrder extends HttpServlet {
 			String res = new Gson().toJson(result);
 			out.write(res);
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 	}
 
 }

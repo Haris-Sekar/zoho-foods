@@ -1,6 +1,6 @@
 var restaurants = [];
 const loadingWrapper = document.getElementById("loading-wrapper");
-
+var restaurantNames = [];
 function fetchRestaurant() {
   loadingWrapper.hidden = false;
   // console.log(window.location.search);
@@ -18,6 +18,7 @@ function fetchRestaurant() {
     url: url,
     success: (data) => {
       console.log(data);
+
       restaurants = data;
       setTimeout(() => {
         loadingWrapper.hidden = true;
@@ -39,7 +40,7 @@ function getCartDet() {
     url: "../Cart",
     success: (data) => {
       console.log(data);
-      cartNo.innerHTML = data.length;
+      cartNo.innerHTML = data.length > 0 ? data.length : "0";
     },
     error: (err) => {
       console.log(err);

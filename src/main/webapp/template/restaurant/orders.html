@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho Foods</title>
+    <link rel="stylesheet" href="../../assets/css/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/resOrders.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="../../">
+                <img src="../../assets/images/logo.png" alt="">
+            </a>
+        </div>
+        <div class="navContent">
+            <a href="./food.html" class="navConText">Foods</a>
+            <a href="./orders.html" class="navConText">Orders</a>
+            <a href="" class="navConText">Review/Ratings</a>
+            <a href="" class="navConText">Account</a>
+            <div class="navConText" onclick="logout()">Logout</div>
+        </div>
+    </div>
+
+    <div class="restaurantDashboard">
+        <div class="liveOrders">
+            <div class="title">Orders</div>
+            <div id="orderDisplay1">
+
+            </div>
+        </div>
+        <div class="liveOrders">
+            <div class="title">Order Details</div>
+            <div id="orderDetailsDisplay">
+                <div id="title">Customer Details</div>
+                <div id="customerDetails">
+                    <div id="customerName">asdf</div>
+                    <div id="customerEmail">asdf</div>
+                    <div id="customerAddress">asdf</div>
+                    <div id="customerPhone">asdf</div>
+                </div>
+                <div id="title">Order Details</div>
+                <div id="orderDetails">
+                    <table>
+                        <tbody id="orderDisplay">
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Name</th>
+                                <th>Quantity</th> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script src="../../assets/js/resOrders.js"></script>
+<script src="../../assets/js/validation/restaurant.js"></script>
+<script src="../../assets/js/logout.js"></script>

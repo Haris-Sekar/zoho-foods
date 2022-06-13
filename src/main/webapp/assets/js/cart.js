@@ -1,16 +1,26 @@
 const loadingWrapper = document.getElementById("loading-wrapper");
 const orderSuccess = document.getElementById("orderSuccess");
+const emptyCart = document.getElementById("emptyCart");
+const cart = document.getElementById("cart");
 function getCartDet() {
   loadingWrapper.hidden = false;
   $.ajax({
     method: "GET",
-    url: "../Cart",
+    url: "../Cart?",
     success: (data) => {
       console.log(data);
       setTimeout(() => {
         loadingWrapper.hidden = true;
       }, 500);
-      cartNo.innerHTML = data.length;
+      cartNo.innerHTML = data.length > 0 ? data.length : "0";
+      if(data.length <= 0){
+        emptyCart.hidden = false;
+        cart.style.display = "none";
+      }
+      else{
+        emptyCart.hidden = true;
+        cart.style.display = "flex";
+      }
       renderCartData(data);
       setTotalBill(data);
     },

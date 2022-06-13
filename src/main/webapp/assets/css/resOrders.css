@@ -1,0 +1,188 @@
+.restaurantDashboard {
+    display: flex;
+    padding: 5% 0;
+
+}
+
+
+.restaurantDashboard .liveOrders {
+    margin: 0 5%;
+    height: 600px;
+    width: 50%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
+    background-color: #e5e5e5;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+
+}
+
+.restaurantDashboard .liveOrders .title {
+    width: 100%;
+    font-size: 30px;
+    padding: 2%;
+    text-align: center;
+    background-color: #293241;
+    color: #fff;
+}
+
+.order {
+    margin: 2%;
+    padding: 3% 1%;
+    border-radius: 10px;
+    background-color: #adb5bd;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    cursor: pointer;
+}
+
+.order .orderDate {
+    font-size: 15px;
+    margin: 0 1%;
+}
+
+.order .orderDet {
+    font-size: 20px;
+    margin: 2% 0 2% 5%;
+}
+
+.order .orderQuantity {
+    font-size: 18px;
+    margin: 0 1%;
+
+}
+
+.order .orderPrice {
+    font-size: 18px;
+    margin: 2% 1%;
+}
+
+.OrderDetails {
+    width: 50%;
+    margin: 0% 5%;
+    background-color: #e5e5e5;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    border-radius: 20px;
+}
+
+
+#orderDetailsDisplay #title {
+    width: 100%;
+    font-size: 20px;
+    padding: 2% 5%;
+}
+
+#orderDetailsDisplay #customerDetails {
+    font-size: 18px;
+    padding: 0 8%;
+}
+
+#orderDetailsDisplay #orderDetails {
+    font-size: 18px;
+    padding: 0 10%;
+}
+
+table { 
+    border-collapse: collapse;
+    width: 100%;
+    /* height: 400px; */
+  }
+  
+  table tr:first-child {
+    border-top: none;
+    background: #EE6C4D;
+    color: #fff;
+  }
+  
+  table tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f9fc;
+    cursor: pointer;
+  }
+  
+  table tr:nth-child(odd):not(:first-child) {
+    background-color: #ebf3f9;
+  }
+  
+  table th {
+    display: none;
+  }
+  
+  table td {
+    display: block;
+    cursor:pointer;
+  }
+  
+  table td:first-child {
+    margin-top: .5em;
+  }
+  
+  table td:last-child {
+    margin-bottom: .5em;
+  }
+  
+  table td:before {
+    content: attr(data-th) ": ";
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    color: #000;
+  }
+  
+  table th,
+  table td {
+    text-align: left;
+  }
+  
+  table {
+    color: #333;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  table tr {
+    border-color: #bfbfbf;
+  }
+  
+  table th,
+  table td {
+    padding: .5em 1em;
+  }
+  
+  @media screen and (max-width: 601px) {
+    table tr:nth-child(2) {
+      border-top: none;
+    }
+  }
+  
+  @media screen and (min-width: 600px) {
+    table tr:hover:not(:first-child) {
+      background-color: #d8e7f3;
+    }
+  
+    table td:before {
+      display: none;
+    }
+  
+    table th,
+    table td {
+      display: table-cell;
+      padding: .25em .5em;
+    }
+  
+    table th:first-child,
+    table td:first-child {
+      padding-left: 0;
+    }
+  
+    table th:last-child,
+    table td:last-child {
+      padding-right: 0;
+    }
+  
+    table th,
+    table td {
+      padding: 1em !important;
+    }
+  }
+  

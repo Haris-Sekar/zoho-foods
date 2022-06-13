@@ -10,8 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
-    <link rel="stylesheet" href="../assets/css/toast.css"> 
-    <link rel="stylesheet" href="../assets/css/restaurantCard.css">
+    <link rel="stylesheet" href="../assets/css/toast.css">
+    <link rel="stylesheet" href="../assets/css/orders.css">
 </head>
 
 
@@ -27,20 +27,48 @@
             </a>
         </div>
         <div class="navContent">
-            <a href="" class="navConText">Restaurants</a>
-            <a href="./orders.html" class="navConText">Orders</a>
+            <a href="./restaurant.html" class="navConText">Restaurants</a>
+            <a href="" class="navConText" id="orders">Orders</a>
             <a href="./cart.html" class="navConText">Cart(<span id="cartNo">0</span>)</a>
             <a href="" class="navConText">Account</a>
             <div class="navConText" onclick="logout()">Logout</div>
         </div>
-    </div> 
-    <div class="resContainer" id="resCardId">
+    </div>
+    <div class="orderTableCon">
+        <div class="orderContainer" id="orderContainer">
+            <table>
+                <tbody id="orderDisplay">
+                    <tr>
+                        <th>Order Date</th>
+                        <th>Restaurant Name</th>
+                        <th>Total quantity</th>
+                        <th>Total Price</th>
+                    </tr>
 
-	</div>  
+                </tbody>
+            </table>
+        </div>
+        <div class="orderDetailsCon" id="orderDetailsCon">
+            <table>
+                <tbody id="orderDetailsDisplay">
+                    <tr>
+                        <th>Name</th>
+                        <th>Food Type</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 
-</html> 
+</html>
 <script src="../assets/js/toast.js"></script>
 <script src="../assets/js/validation/user.js"></script>
 <script src="../assets/js/userLogout.js"></script>
-<script src="../assets/js/restaurantCard.js"></script>
+<script src="../assets/js/orders.js"></script>
+<script>
+    const orders = document.getElementById('orders');
+    orders.style.color = '#EE6C4D';
+</script>

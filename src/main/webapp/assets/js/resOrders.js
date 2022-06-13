@@ -1,5 +1,3 @@
-const name1 = document.getElementById("resName");
-name1.innerHTML = window.localStorage.restaurantName;
 const orderDisplay = document.getElementById("orderDisplay1");
 
 var resOrders;
@@ -7,8 +5,8 @@ function getOrders() {
   $.ajax({
     method: "GET",
     url: "../../Orders?for=restaurant",
-    success: (data) => { 
-    orderDisplay.innerHTML = "";
+    success: (data) => {
+      orderDisplay.innerHTML = "";
       resOrders = data;
       console.log(data);
       renderOrder(data);
@@ -60,7 +58,7 @@ function renderOrder(data) {
       orderObj.totPrice += ele2.foodPrice;
     });
     orderDet.push(orderObj);
-  }); 
+  });
   orderDet.forEach((ele) => {
     var foodNames = [];
     var foodNamesString = "";
@@ -70,7 +68,7 @@ function renderOrder(data) {
           "<li>" + ele1.foodName + " - " + ele1.quantity + "</li>";
       }
     });
-    const orderTr = `<div class="order" onclick="renderOrderDetails(${ele.orderId})">
+    const orderTr = `<div class="order" onclick="renderOrderDetails(${ele.orderId})" id="sepOrder-${ele.orderId}" >
     <div class="orderDate">${ele.orderDate}, ${ele.userEmail}, ${ele.userPhone}</div>
     <div class="orderDet"><ul>${foodNamesString}</ul></div>
     <div class="orderQuantity">Total Quantity: ${ele.totQty}</div> 
@@ -81,8 +79,40 @@ function renderOrder(data) {
 }
 
 function refresh() {
-    getOrders();
+  getOrders();
 }
 setInterval(() => {
   getOrders();
 }, 10000);
+
+function renderOrderDetails(id) {
+  document.getElementById("orderDisplay").innerHTML = ` <tr>
+  <th>Order Date</th>
+  <th>Name</th>
+  <th>Quantity</th> 
+</tr>`;
+  var orderDet = resOrders.filter((ele) => ele.orderId === id);
+  const customerName = document.getElementById("customerName");
+  const customerAddress = document.getElementById("customerAddress");
+  const customerEmail = document.getElementById("customerEmail");
+  const customerPhone = document.getElementById("customerPhone");
+  customerName.innerHTML = orderDet[0].userName;
+  customerAddress.innerHTML = orderDet[0].userAddress;
+  customerEmail.innerHTML = orderDet[0].userEmail;
+  customerPhone.innerHTML = orderDet[0].userPhone;
+  var date = new Date(orderDet[0].timeCreated);
+  const timestamp =
+    date.toLocaleDateString() +
+    " " +
+    date.toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+  orderDet.forEach((ele) => {
+    const orderTr = `<tr>
+    <td>${timestamp}</td>
+    <td>${ele.foodName}</td>
+    <td>${ele.quantity}</td> 
+    </tr>`;
+    document.getElementById("orderDisplay").innerHTML += orderTr;
+  });
+
+  console.log(orderDet);
+}

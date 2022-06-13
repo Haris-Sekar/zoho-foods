@@ -38,6 +38,7 @@ public class RestaurantLogin extends HttpServlet {
 				HttpSession session = req.getSession();
 				session.setAttribute("name", restaurant_name);
 				session.setAttribute("email", email);
+				session.setAttribute("restaurant_id", rs.getInt("id"));
 				session.setMaxInactiveInterval(10 * 60);
 
 				models.Restaurant restaurant = new models.Restaurant();

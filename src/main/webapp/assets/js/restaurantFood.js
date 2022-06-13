@@ -117,6 +117,8 @@ function decreaseValue(i) {
 
 const cartNo = document.getElementById("cartNo");
 const res_id = id;
+const alert = document.getElementById("alert");
+const alertText = document.getElementById("alertText");
 function addCart(id, i) {
   loadingWrapper.hidden = false;
 
@@ -132,8 +134,9 @@ function addCart(id, i) {
     success: (data) => {
       console.log(data);
       if(data.result === "failure"){
+        alert.hidden = false;
         loadingWrapper.hidden = true;
-        var res =  callPrompt("You have already have items in cart with different restaurant. Do you want to clear the cart and continue?");
+        alertText.innerHTML = "You already have items in cart with different restaurant. Do you want to clear the cart and continue?";
       }
       else{
         setTimeout(() => {
@@ -145,12 +148,17 @@ function addCart(id, i) {
           message: "Added to cart",
           duration: 500000,
         });
-        cartNo.innerHTML = data.length;
+        cartNo.innerHTML = data.length > 0 ? data.length : "0";
         
       }
     },
-    error: (err) => {
+    error: (data) => {
       console.log("err",err.responseText);
+      if(data.responseText.result === "failure"){
+        alert.hidden = false;
+        loadingWrapper.hidden = true;
+        alertText.innerHTML = "You have already have items in cart with different restaurant. Do you want to clear the cart and continue?";
+      }
     },
   });
 }
@@ -166,7 +174,7 @@ function getCart() {
       setTimeout(() => {
         loadingWrapper.hidden = true;
       }, 500);
-      cartNo.innerHTML = data.length;
+      cartNo.innerHTML = data.length > 0 ? data.length : "0";
 
       // renderCard(data);
     },

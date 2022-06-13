@@ -11,17 +11,24 @@
 
 
 .restaurantDashboard .liveOrders {
-    margin: 0 5%;
-    border: 2px solid black;
+    margin: 0 5%; 
     height: 600px;
     width: 50%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
+    background-color: #e5e5e5 ;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+
 }
 
 .restaurantDashboard .liveOrders .title{
-    width: 100%;
-    border-bottom: 2px solid black;
-    font-size: 40px;
+    width: 100%; 
+    font-size: 30px;
+    padding: 2%;
     text-align: center;
+    background-color: #293241;
+    color: #fff;
 }
 
 .restaurantDashboard .statistics {
@@ -29,5 +36,35 @@
     border: 2px solid black;
     width: 50%;
     height: 600px;
+    background-color: #98C1D9;
 
+}
+
+.order{ 
+    margin: 2%;
+    padding: 3% 1%;
+    border-radius: 10px;
+    background-color: #adb5bd;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.order .orderDate{
+    font-size: 15px;
+    margin: 0 1%;
+}
+
+.order .orderDet{
+    font-size: 20px;
+    margin: 2% 0 2% 5%;
+}
+
+.order .orderQuantity{
+    font-size: 18px;
+    margin: 0 1%;
+
+}
+
+.order .orderPrice{
+    font-size: 18px;
+    margin: 2% 1%;
 }

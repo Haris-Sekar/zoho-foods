@@ -50,7 +50,7 @@ a{
     color: #EE6C4D;
 }
 
-.navbar .navContent .btnNavbar {
+.navbar .navContent .btnnavbar {
     border: none;
     background-color: #ffffff;
     color: black;
@@ -64,7 +64,7 @@ a{
     cursor: pointer;
 }
 
-.navbar .navContent .btnNavbar:hover {
+.navbar .navContent .btnnavbar:hover {
     transform: scale(1.1);
     color: #EE6C4D;
     /* box-shadow: 10px 10px 10px #d6d6d6; */

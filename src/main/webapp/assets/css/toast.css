@@ -63,7 +63,7 @@
     transform: translateX(100%);
     animation: toast-opening var(--transition-duration) ease-in-out forwards;
     overflow-x: hidden;
-    margin-top:5%;
+    margin-top:30%;
   }
   .toasts-container .toast:not(.active) {
     animation-name: toast-closing;

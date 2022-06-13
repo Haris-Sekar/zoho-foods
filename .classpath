@@ -21,5 +21,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/shari/Downloads/json-20220320.jar"/>
+	<classpathentry kind="lib" path="C:/Users/shari/Downloads/Compressed/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/shari/Downloads/Compressed/activation.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

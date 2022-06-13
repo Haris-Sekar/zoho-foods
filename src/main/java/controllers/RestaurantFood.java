@@ -28,7 +28,7 @@ public class RestaurantFood extends HttpServlet {
 			Dbconnection db = new Dbconnection();
 			Connection con = db.initializeDatabase();
 			int id = Integer.parseInt(req.getParameter("id"));
-			SimpleDateFormat format = new SimpleDateFormat("kk:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 			String time = format.format(new Date(System.currentTimeMillis()));
 			String query = "select fd.id,fd.name,res.name as restaurant_name,fc.name as cat_name,fd.food_type,fd.food_description,fd.food_image,fd.price,fd.discount,fd.food_prep_time  from foods as fd inner join restaurant as res on fd.restaurant_id = res.id inner join food_category as fc on fd.category_id = fc.id where res.is_active = 1 and res.id = '"
 					+ id + "' and fd.food_time_start <= '" + time + "' and fd.food_time_end >= '" + time

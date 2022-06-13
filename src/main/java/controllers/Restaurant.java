@@ -25,7 +25,7 @@ public class Restaurant extends HttpServlet {
 		try {
 			Dbconnection db = new Dbconnection();
 			Connection con = db.initializeDatabase();
-			SimpleDateFormat format = new SimpleDateFormat("kk:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 			String time = format.format(new Date(System.currentTimeMillis()));
 			System.out.println(time);
 

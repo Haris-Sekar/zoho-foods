@@ -106,9 +106,10 @@ public class Food extends HttpServlet {
 		try {
 			Dbconnection db = new Dbconnection();
 			Connection con = db.initializeDatabase();
-			SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 			String time = format.format(new Date(System.currentTimeMillis()));
-			System.out.println(time);
+			
+			System.out.println("time"+time);
 			HttpSession session = req.getSession();
 			String email = (String) session.getAttribute("email");
 			String resIdQuery = "SELECT id FROM restaurant WHERE email = '" + email + "'";

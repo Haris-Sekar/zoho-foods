@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import com.google.gson.Gson;
 
@@ -38,7 +39,7 @@ public class Cart extends HttpServlet {
 			}
 
 			// String checkCartExistQuery = "SELECT * FROM cart WHERE user_id = '" + user_id
-			// + "'";	
+			// + "'";
 			String cartCountQuery = "SELECT count(*) as count, fd.restaurant_id as res_id FROM cart as ct inner join foods as fd on ct.food_id = fd.id WHERE user_id = '"
 					+ user_id + "'";
 			rs = st.executeQuery(cartCountQuery);
@@ -134,33 +135,54 @@ public class Cart extends HttpServlet {
 			while (rs.next()) {
 				user_id = rs.getInt("id");
 			}
-			String cartQuery = "select res.name as res_name, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on res.id = fd.restaurant_id where ct.user_id = "
-					+ user_id;
-			rs = st.executeQuery(cartQuery);
-			List<models.Cart> carts = new ArrayList<models.Cart>();
-			while (rs.next()) {
-				models.Cart cart = new models.Cart();
-				cart.setId(rs.getInt("id"));
-				cart.setUserId(user_id);
-				cart.setName(rs.getString("name"));
-				cart.setFoodType(rs.getString("food_type"));
-				cart.setCategoryName(rs.getString("categoryName"));
-				cart.setDescription(rs.getString("food_description"));
-				cart.setImage(rs.getString("food_image"));
-				cart.setPrice(rs.getInt("price"));
-				cart.setDiscount(rs.getInt("discount"));
-				cart.setQuantity(rs.getInt("quantity"));
-				cart.setRes_name(rs.getString("res_name"));
-				cart.setArea(rs.getString("area"));
-				cart.setTown(rs.getString("town"));
-				cart.setType(rs.getString("type"));
-				carts.add(cart);
+			int clearCart = 0;
+			if (req.getParameter("clear") != null) {
+				clearCart = Integer.parseInt(req.getParameter("clear"));
+				System.out.println("clear: " + clearCart);
 			}
-			String result = new Gson().toJson(carts.toArray());
-			res.setContentType("application/json");
-			res.setCharacterEncoding("UTF-8");
-			out.write(result);
-			con.close();
+			System.out.println(clearCart);
+			if (clearCart == 1) {
+				String query = "delete from cart where user_id = " + user_id;
+				System.out.println(query);
+				st.executeUpdate(query);
+				models.Result res1 = new models.Result();
+				res1.setResult("success");
+				res1.setMessage("Cart cleared");
+				String result = new Gson().toJson(res1);
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+				out.write(result);
+				con.close();
+			} else {
+
+				String cartQuery = "select res.name as res_name, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on res.id = fd.restaurant_id where ct.user_id = "
+						+ user_id;
+				rs = st.executeQuery(cartQuery);
+				List<models.Cart> carts = new ArrayList<models.Cart>();
+				while (rs.next()) {
+					models.Cart cart = new models.Cart();
+					cart.setId(rs.getInt("id"));
+					cart.setUserId(user_id);
+					cart.setName(rs.getString("name"));
+					cart.setFoodType(rs.getString("food_type"));
+					cart.setCategoryName(rs.getString("categoryName"));
+					cart.setDescription(rs.getString("food_description"));
+					cart.setImage(rs.getString("food_image"));
+					cart.setPrice(rs.getInt("price"));
+					cart.setDiscount(rs.getInt("discount"));
+					cart.setQuantity(rs.getInt("quantity"));
+					cart.setRes_name(rs.getString("res_name"));
+					cart.setArea(rs.getString("area"));
+					cart.setTown(rs.getString("town"));
+					cart.setType(rs.getString("type"));
+					carts.add(cart);
+				}
+				String result = new Gson().toJson(carts.toArray());
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+				out.write(result);
+				con.close();
+			}
 		} catch (Exception e) {
 			models.Result Res = new models.Result();
 			Res.setResult("error");
