@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import com.google.gson.Gson;
 
@@ -155,7 +154,7 @@ public class Cart extends HttpServlet {
 				con.close();
 			} else {
 
-				String cartQuery = "select res.name as res_name, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on res.id = fd.restaurant_id where ct.user_id = "
+				String cartQuery = "select res.name as res_name,res.id as res_id, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on res.id = fd.restaurant_id where ct.user_id = "
 						+ user_id;
 				rs = st.executeQuery(cartQuery);
 				List<models.Cart> carts = new ArrayList<models.Cart>();
@@ -175,6 +174,7 @@ public class Cart extends HttpServlet {
 					cart.setArea(rs.getString("area"));
 					cart.setTown(rs.getString("town"));
 					cart.setType(rs.getString("type"));
+					cart.setRes_id(rs.getInt("res_id"));
 					carts.add(cart);
 				}
 				String result = new Gson().toJson(carts.toArray());

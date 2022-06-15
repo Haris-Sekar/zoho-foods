@@ -75,7 +75,6 @@ public class Category extends HttpServlet {
 			}
 			if (type.equals("insert")) {
 
-
 				String sql = "INSERT INTO food_category(name,restaurant_id)VALUES(?,?)";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, name);
@@ -99,10 +98,15 @@ public class Category extends HttpServlet {
 				String output = new Gson().toJson(result);
 				out.print(output);
 			} else if (type.equals("delete")) {
+				String deleteFoods = "delete from food where category_id = ?";
 				String query2 = "DELETE FROM food_category WHERE id = ? ";
 				PreparedStatement ps = con.prepareStatement(query2);
+				PreparedStatement ps1 = con.prepareStatement(deleteFoods);
+
 				ps.setInt(1, Integer.parseInt(req.getParameter("id")));
+				ps1.setInt(1, Integer.parseInt(req.getParameter("id")));
 				ps.executeUpdate();
+				ps1.executeUpdate();
 				models.Result result = new models.Result();
 				result.setResult("success");
 				result.setMessage("Category deleted successfully");

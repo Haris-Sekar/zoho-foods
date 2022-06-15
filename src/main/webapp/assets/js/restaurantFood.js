@@ -54,7 +54,10 @@ function renderResDetails(res) {
         <div id="time">${time24HrTo12hr(res.resStartTime)} - ${time24HrTo12hr(
     res.resEndTime
   )}</div>
-        <div id="resType">${resType}</div>
+        <div id="resType">${resType}+</div>
+        ${(res.rating == 0)?"":`<div id="ratingCon">
+            <div class="imgCon"><img src="../assets/images/star.png" alt=""></div><div id="ratingText">${res.rating}</div> </div>`}
+            
     </div>
   </div>`;
   resDet.innerHTML = data;

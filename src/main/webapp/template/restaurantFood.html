@@ -45,8 +45,13 @@
 			<a href="./restaurant.html" class="navConText">Restaurants</a>
 			<a href="./orders.html" class="navConText">Orders</a>
 			<a href="./cart.html" class="navConText">Cart(<span id="cartNo">0</span>)</a>
-			<a href="" class="navConText">Account</a>
-			<div class="navConText" onclick="logout()">Logout</div>
+			<div class="profilePic" id="profilePic">
+				<div class="imgCon" id="imgConProfile"></div>
+				<div class="dropDown" id="dropDown">
+					<a href="./account.html" class="navConText1">Account</a>
+					<div class="navConText1" onclick="logout()">Logout</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="resCard" id="resDet">
@@ -58,7 +63,7 @@
 	</div>
 </body>
 
-</html> 
+</html>
 <script src="../assets/js/alert.js"></script>
 <script src="../assets/js/toast.js"></script>
 <script src="../assets/js/restaurantFood.js"></script>

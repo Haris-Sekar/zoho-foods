@@ -13,11 +13,10 @@ function getCartDet() {
         loadingWrapper.hidden = true;
       }, 500);
       cartNo.innerHTML = data.length > 0 ? data.length : "0";
-      if(data.length <= 0){
+      if (data.length <= 0) {
         emptyCart.hidden = false;
         cart.style.display = "none";
-      }
-      else{
+      } else {
         emptyCart.hidden = true;
         cart.style.display = "flex";
       }
@@ -31,12 +30,14 @@ function getCartDet() {
 }
 
 getCartDet();
+var resId;
 
 var totDisAmt = 0;
 function renderCartData(data) {
   const cartItems = document.getElementById("cartItems");
   data.forEach((ele) => {
     totDisAmt += Math.round((ele.price * ele.discount) / 100) * ele.quantity;
+    resId = ele.res_id;
     const foodType = ele.foodType === "veg" ? "veg.png" : "nv.png";
     const cartData = `<div class="card">
         <div class="foodDetContainer">
@@ -98,7 +99,6 @@ function deleteCart(id) {
 }
 
 var userId;
-
 function setTotalBill(data) {
   const billResName = document.getElementById("billResName");
   const billRes = document.getElementById("billResAdd");
@@ -166,3 +166,44 @@ placeOrderBtn.addEventListener("click", () => {
   });
   console.log(userId);
 });
+
+function review() {
+  alert1.style.display = "block";
+  orderSuccess.style.display = "none";
+  alert(resId);
+  const resId1 = document.getElementById("resId");
+  resId1.value = resId;
+}
+
+function clicked(num) {
+  const ele = document.getElementById("number-" + num);
+  const rating = document.getElementById("rating1");
+  const otherEle = document.querySelectorAll(".number");
+  alert(num);
+  rating.value = num;
+  otherEle.forEach((ele) => {
+    ele.style.backgroundColor = "#3D5A80";
+  });
+  ele.style.backgroundColor = "#EE6C4D";
+}
+ 
+
+function postReview(){
+  $.ajax({
+    method: "POST",
+    url: "../Review",
+    data: $("#rating").serialize(),
+    success: (data) => {
+      console.log(data);
+      toastsFactory.createToast({
+        type: "success",
+        icon: "check-circle",
+        message: "Review Posted Successfully",
+        duration: 2000,
+      });
+      setTimeout(() => {
+        window.location = "./restaurant.html";
+      }, 2000);
+    }
+  })
+}

@@ -37,6 +37,20 @@
     border: none;
 } 
 
+.signupContainer .signup input[type="file"] {
+    width: 35%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+    margin: 2% 2% 2% 0;
+    padding: 10px;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    border: 2px solid white;
+    background-color: white;
+  }
+
 .signupContainer .signup label {
     color: white;
    

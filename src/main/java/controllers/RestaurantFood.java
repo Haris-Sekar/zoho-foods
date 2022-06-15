@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import java.sql.*;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -50,7 +51,8 @@ public class RestaurantFood extends HttpServlet {
 				food.setTime(Integer.parseInt(rs.getString("food_prep_time")));
 				foods.add(food);
 			}
-			String getResDetailQuery = "select * from restaurant where id = '" + id + "'";
+			String getResDetailQuery = "select res.id, res.name, res.area, res.town, res.state, res.res_start_time, res.res_end_time, res.res_type, avg(rev.rating) as rating from restaurant as res inner join review as rev on rev.res_id = res.id where res.id = '"
+					+ id + "'";
 			ResultSet rs1 = st.executeQuery(getResDetailQuery);
 			models.Restaurant restaurant = new models.Restaurant();
 			while (rs1.next()) {
@@ -62,6 +64,8 @@ public class RestaurantFood extends HttpServlet {
 				restaurant.setResStartTime(rs1.getString("res_start_time"));
 				restaurant.setResEndTime(rs1.getString("res_end_time"));
 				restaurant.setResType(rs1.getString("res_type"));
+				DecimalFormat df = new DecimalFormat("#.##");
+				restaurant.setRating(Float.valueOf(df.format(rs1.getFloat("rating"))));
 			}
 			JSONObject json = new JSONObject();
 			List<models.Restaurant> restaurants = new ArrayList<models.Restaurant>();

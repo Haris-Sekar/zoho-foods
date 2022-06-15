@@ -22,7 +22,7 @@ public class UserValidation extends HttpServlet {
 			Connection con = db.initializeDatabase();
 			HttpSession session = req.getSession();
 			String email = session.getAttribute("email").toString();
-			System.out.println("email"+email);
+			System.out.println("email" + email);
 			String query = "select * from users where email = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, email);
@@ -31,6 +31,7 @@ public class UserValidation extends HttpServlet {
 				models.Users user = new models.Users();
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
+				user.setProfilePic(rs.getString("profile_pic"));
 				user.setResult("success");
 				String result = new Gson().toJson(user);
 				res.setContentType("application/json");

@@ -15,6 +15,15 @@ public class Restaurant {
     String result;
     int id;
     int foodCount;
+    float rating;
+
+    public float getRating() {
+        return this.rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
 
     public int getFoodCount() {
         return this.foodCount;

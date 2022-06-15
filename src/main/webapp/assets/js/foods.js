@@ -124,7 +124,7 @@ function catCancel1() {
 }
 
 function deleteCat(id) {
-  text1.innerHTML = "Are you sure you want to delete this category?";
+  text1.innerHTML = "Are you sure you want to delete this category? if yes all products associated with this category will be deleted";
   text1.style.color = "white";
   var data = categoryList.filter((category) => category.id == id);
   catName.value = data[0].name;
@@ -230,8 +230,8 @@ fetchAllFoods();
       </div>
       <div id="offer">${food.discount}% offer</div>
       <div id="btnContainer">
-        <button id="btn1" onclick="editFood(${food.id})">Edit</button>
-        <button id="btn2" onclick="deleteFood(${food.id})" style="background-color:red;">Delete</button>
+        <button class="btn1" onclick="editFood(${food.id})">Edit</button>
+        <button class="btn2" onclick="deleteFood(${food.id})" style="background-color:red;">Delete</button>
       </div>
     </div>`;
     renderFoods.innerHTML += data;
@@ -243,11 +243,17 @@ function editFood(id) {
   displayAddFood();
   const data = foodList.filter((food) => food.id == id);
   const text = document.getElementById("text");
+  console.log(data[0]);
   text.innerHTML = "Edit Food";
   const name = document.getElementById("name");
   const desc = document.getElementById("desc");
   const discount = document.getElementById("discount");
   const price = document.getElementById("price");
   const stock = document.getElementById("stock");
+  name.value = data[0].name;
+  desc.value = data[0].description;
+  discount.value = data[0].discount;
+  price.value = data[0].price;
+  stock.value = data[0].stock;
 
 }

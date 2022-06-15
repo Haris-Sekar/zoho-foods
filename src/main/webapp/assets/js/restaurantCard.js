@@ -6,15 +6,15 @@ function fetchRestaurant() {
   // console.log(window.location.search);
   var url;
   if (
-    window.location.href ===
-    "http://localhost:8080/Zoho_Food/" || window.location.href === "http://localhost:8080/Zoho_Food/index.html"
+    window.location.href === "http://localhost:8080/Zoho_Food/" ||
+    window.location.href === "http://localhost:8080/Zoho_Food/index.html"
   ) {
     url = "Restaurant";
   } else {
     url = "../Restaurant";
   }
   $.ajax({
-    method: "POST",
+    method: "GET",
     url: url,
     success: (data) => {
       console.log(data);
@@ -77,8 +77,8 @@ function renderRestaurant() {
     // if(res.resStartTime)
     var imgUrl;
     if (
-      window.location.href ===
-      "http://localhost:8080/Zoho_Food/" || window.location.href === "http://localhost:8080/Zoho_Food/index.html"
+      window.location.href === "http://localhost:8080/Zoho_Food/" ||
+      window.location.href === "http://localhost:8080/Zoho_Food/index.html"
     ) {
       imgUrl = "./assets/images/res.jpg";
     } else {
@@ -98,6 +98,11 @@ function renderRestaurant() {
                   res.resStartTime
                 )} - ${time24HrTo12hr(res.resEndTime)}</div>
                 <div id="resType">${resType}</div>
+                
+            ${(res.rating == 0)?"":`<div id="ratingCon">
+            <div class="imgCon"><img src="../assets/images/star.png" alt=""></div><div id="ratingText">${res.rating}</div> </div>`}
+            
+       
             </div>
         </div>  
     
