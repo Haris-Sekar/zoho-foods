@@ -1,17 +1,53 @@
 package models;
 
-public class Food {
-    int id;
-    int restaurantId;
-    String name;
-    float price;
-    float discount;
-    String description;
-    String category;
-    String type;
-    String restaurantName;
-    String image;
-    int prepTime;   
+public class Food extends Restaurant{
+    private int id;
+    private int restaurantId;
+    private String name;
+    private float price;
+    private float discount;
+    private String description;
+    private String category;
+    private int cat_id;
+    private String type;
+    private String restaurantName;
+    private String image;
+    private int prepTime;
+    private int stock;
+    private String stime;
+    private String etime;
+
+    public String getStime() {
+        return this.stime;
+    }
+
+    public void setStime(String stime) {
+        this.stime = stime;
+    }
+
+    public String getEtime() {
+        return this.etime;
+    }
+
+    public void setEtime(String etime) {
+        this.etime = etime;
+    }
+
+    public int getCat_id() {
+        return this.cat_id;
+    }
+
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
+    }
+
+    public int getStock() {
+        return this.stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
     public float getDiscount() {
         return this.discount;

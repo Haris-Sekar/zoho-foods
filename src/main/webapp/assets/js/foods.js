@@ -124,7 +124,8 @@ function catCancel1() {
 }
 
 function deleteCat(id) {
-  text1.innerHTML = "Are you sure you want to delete this category? if yes all products associated with this category will be deleted";
+  text1.innerHTML =
+    "Are you sure you want to delete this category? if yes all products associated with this category will be deleted";
   text1.style.color = "white";
   var data = categoryList.filter((category) => category.id == id);
   catName.value = data[0].name;
@@ -173,7 +174,7 @@ function foodAdd() {
     contentType: false,
     success: function (data) {
       console.log(data);
-      setTimeout(() => { 
+      setTimeout(() => {
         window.localStorage.setItem("tabAt", "food");
         window.location.reload();
       }, 10000);
@@ -181,9 +182,8 @@ function foodAdd() {
         message: "Food Added Successfully",
         type: "success",
         duration: 5000,
-        icon:'check-circle'
+        icon: "check-circle",
       });
-     
     },
     error: (err) => {
       console.log(err);
@@ -211,12 +211,14 @@ function fetchAllFoods() {
 
 fetchAllFoods();
 
-  function renderFood(foods) {
-    const renderFoods = document.getElementById("renderFoods");
-    foods.forEach((food) => {
-      const data = `<div class="card">
+function renderFood(foods) {
+  const renderFoods = document.getElementById("renderFoods");
+  foods.forEach((food) => {
+    const data = `<div class="card">
       <div class="imgContainer">
-        <img src="../../uploads/foodsPic/${food.image}" alt="Food Pic" srcset="" id="image"> 
+        <img src="../../uploads/foodsPic/${
+          food.image
+        }" alt="Food Pic" srcset="" id="image"> 
       </div>
       <div class="foodDetails">
         <div id="foodName">${food.name}</div>
@@ -225,19 +227,22 @@ fetchAllFoods();
           <div id="time">${food.prepTime} mins</div>
           <div id="dot"><img src="../../assets/images/foodDot.png" /></div>
           <div id="rate">₹${food.price}</div>
-          <div id="netRate">₹${food.price - Math.round((food.price * food.discount)/100)}</div>
+          <div id="netRate">₹${
+            food.price - Math.round((food.price * food.discount) / 100)
+          }</div>
         </div>
       </div>
       <div id="offer">${food.discount}% offer</div>
       <div id="btnContainer">
         <button class="btn1" onclick="editFood(${food.id})">Edit</button>
-        <button class="btn2" onclick="deleteFood(${food.id})" style="background-color:red;">Delete</button>
+        <button class="btn2" onclick="deleteFood(${
+          food.id
+        })" style="background-color:red;">Delete</button>
       </div>
     </div>`;
     renderFoods.innerHTML += data;
-    });
-  }
-
+  });
+}
 
 function editFood(id) {
   displayAddFood();
@@ -250,10 +255,28 @@ function editFood(id) {
   const discount = document.getElementById("discount");
   const price = document.getElementById("price");
   const stock = document.getElementById("stock");
+  const addFoodCat = document.getElementById("addFoodCat");
+  const type1 = document.getElementById("type1");
+  const type2 = document.getElementById("type2");
+  const stime = document.getElementById("stime");
+  const etime = document.getElementById("etime");
+  const prepTime = document.getElementById("prepTime");
   name.value = data[0].name;
   desc.value = data[0].description;
   discount.value = data[0].discount;
   price.value = data[0].price;
   stock.value = data[0].stock;
+  addFoodCat.value = data[0].cat_id;
+  data[0].type === "veg" ? (type1.checked = true) : (type2.checked = true);
+  stime.value = data[0].stime;
+  etime.value = data[0].etime;
+  prepTime.value = data[0].prepTime;
+  const fileCon = document.getElementById("fileCon");
+  fileCon.innerHTML = `<div class="imgCon" id="foodPicPreview"><img src="../../uploads/foodsPic/${data[0].image}" alt=""> <button class="imgDelete" onclick="deleteFoodImg()">Delete</button></div>`;
 
+}
+
+
+function deleteFoodImg(){
+  
 }

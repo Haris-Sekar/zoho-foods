@@ -26,10 +26,10 @@
 				<form method="post" id="editProfilePic" enctype="multipart/form-data">
 					<div class="alert-text">
 						<input type="file" name="file" id="file">
-						<input hidden type="text" name="name" value=""  id="fileUpName">
+						<input hidden type="text" name="name" value="" id="fileUpName">
 						<input hidden type="text" name="email" value="" id="fileUpEmail">
 						<input hidden type="text" name="phone" value="" id="fileUpPhone">
-						<input hidden type="text" name="type" value=""  id="fileUpType">
+						<input hidden type="text" name="type" value="" id="fileUpType">
 					</div>
 					<div class="alert-button">
 						<button class="alert-button-text" onclick="updateProfilePic()">Update</button>
@@ -49,7 +49,14 @@
 		<div class="navContent">
 			<a href="./restaurant.html" class="navConText">Restaurants</a>
 			<a href="./orders.html" class="navConText">Orders</a>
-			<a href="./cart.html" class="navConText">Cart(<span id="cartNo">0</span>)</a>
+			<a href="./cart.html" class="navConText">
+				<div class="navCart">
+					<div class="navCart-icon">
+						<img src="../assets/images/cart.png" alt="">
+					</div>
+					<div class="navCart-badge"><span id="cartNo">0</span></div>
+				</div>
+			</a>
 			<div class="profilePic" id="profilePic">
 				<div class="imgCon" id="imgConProfile"></div>
 				<div class="dropDown" id="dropDown">
@@ -62,37 +69,61 @@
 	<div class="profileContainer">
 		<div class="menu">
 			<ul>
-				<li>Edit Profile</li>
-				<li>Change Password</li>
-				<li>Manage Address</li>
+				<li id="editProfile" onclick="editProfile1()">Edit Profile</li>
+				<li id="passwordChange" onclick="passwordChange1()">Change Password</li> 
 			</ul>
 		</div>
-		<div class="contentPage">
+		<div class="contentPage" id=userEdit>
 			<table>
 				<tr>
 					<td>
 						<div class="imgCon" id="profilePic1"></div>
 					</td>
-					<td id="profile">
-						<h3>Haris</h3>
+					<td id="profile"> 
 						<div id="changeProfile" onclick="profileChange()">Change Profile Photo</div>
 					</td>
 				</tr>
-				<tr>
-					<td>Name</td>
-					<td id="nameCon"><input type="text" name="name" id="name"></td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td id="emailCon"><input type="email" name="email" id="email"></td> 
-				</tr>
-				<tr>
-					<td>Phone</td>
-					<td id="phoneCon"><input type="number" name="phone" id="phone"></td>
-				</tr>
+				<form method="post" id="updateForm">
+					<input style="display: none;" type="text" name="fileName" id="fileName" value="" hidden>
+					<input style="display: none;" type="text" name="type" id="type" value="edit" hidden>
+					<tr>
+						<td>Name</td>
+						<td id="nameCon"><input type="text" name="name" value="" id="name"></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td id="emailCon"><input type="email" name="email" value="" id="email"></td>
+					</tr>
+					<tr>
+						<td>Phone</td>
+						<td id="phoneCon"><input type="number" name="phone" value="" id="phone"></td>
+					</tr>
+				</form>
 			</table>
 			<div class="save" id="save">Save</div>
 		</div>
+		<div class="contentPage" id="passwordCon" hidden>
+			<table>
+				<form method="post" id="passwordChangeForm">
+					<tr>
+						<td>New Password</td>
+						<td id=""><input type="password" name="password" value="" id="password"></td>
+					</tr>
+					<tr>
+						<td>Confirm Password</td>
+						<td id="phoneCon"><input type="password" name="conPassword" value="" id="conPassword"></td>
+					</tr>
+				</form>
+			</table>
+			<div id="err">
+				<ul>
+					<li><span><img src="../assets/images/remove.png" alt="" srcset="" id="errImg6"></span>Password
+						must be atleast 6 characters</li>
+				</ul>
+			</div>
+			<div class="save" id="change">Change</div>
+		</div>
+
 	</div>
 </body>
 

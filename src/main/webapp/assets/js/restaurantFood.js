@@ -12,7 +12,7 @@ function getFood(id) {
       food = data.foods;
       resDetails = data.restaurantDetails[0];
       console.log(food);
-      console.log(resDetails);
+      console.log("res",resDetails);
       renderResDetails(resDetails);
       renderFood(food);
       //   renderFood();
@@ -188,3 +188,24 @@ function getCart() {
 }
 
 getCart();
+
+
+function fetchAllReviews(){
+  $.ajax({
+    method:"GET",
+    url:"../Review?id="+id,
+    success:(data)=>{
+      console.log(data);
+      // renderReviews(data);
+    },
+    error:(err)=>{
+      console.log(err);
+    }
+  })
+}
+
+fetchAllReviews();
+
+function renderReview(){
+  d
+}

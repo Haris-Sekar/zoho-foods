@@ -9,7 +9,12 @@ function login() {
                 window.localStorage.restaurantEmail = data.email;
                 window.location.replace('./home.html');
             } else {
-                $('#loginError').text(data.message);
+                toastsFactory.createToast({
+                    type: 'error',
+                    icon: 'exclamation-circle',
+                    message: 'Invalid email or password',
+                    duration: 5000
+                }); 
             }
         }
     })

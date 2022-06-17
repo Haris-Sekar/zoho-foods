@@ -4,8 +4,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+/*   align-items: center; */
   padding: 2% 0 5% 0;
+}
+
+.addFoodCon{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .foodContainer .tabsContainer {
@@ -279,7 +286,7 @@ select {
 .categoryContainer {
   display: flex;
   display: none;
-  width: 80%;
+/*   width: 80%; */
 }
 
 .categoryContainer .allCategory {
@@ -425,4 +432,34 @@ table td {
   transition: 0.3s ease-in-out;
   cursor: pointer;
   border: none;
+}
+
+#addFoodForm .imgCon{
+  display:flex;
+  justify-content:end;
+  margin: 0 40%;
+  width:fit-content;
+  padding: 2%;
+  background-color:#f1f1f1;
+}
+
+#addFoodForm .imgCon img{
+  width: 300px;
+  height:200px;  
+  border:2px solid black;
+  filter:brightness(50%);
+}
+
+#addFoodForm .imgCon .imgDelete{
+  position:absolute;
+  padding:0.5% 1%;
+  border:none;
+  margin:0.5%;
+  background-color: #EE6C4D;
+  color:white;
+  border-radius:5px;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s ease-in-out;
+  
 }

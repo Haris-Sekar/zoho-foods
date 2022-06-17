@@ -1,0 +1,40 @@
+.searchRes{
+    margin-top:-22px;
+    display:none;
+    justify-content:center;
+ 
+}
+
+.searchRes ul{
+    width: 480px;
+    border:2px solid #adb5bd;
+    margin:0;
+    padding:0;
+    background-color:#fff;
+    border-radius:10px;
+    max-height:400px;
+    overflow:auto;
+    
+}
+.searchRes ul li{
+    list-style-type: none;
+    font-size:18px;
+    padding: 3% 5%;
+    border-bottom:1px solid black;
+    
+}
+
+.searchRes ul li a{
+    display:flex;
+    align-items: center;
+    gap:5%;
+}
+.imgCon{
+    width:30px;
+    height:30px;
+}
+.imgCon img{
+    width:100%;
+    height:100%;
+}
+

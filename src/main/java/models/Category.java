@@ -1,9 +1,9 @@
 package models;
 
 public class Category {
-    String name;
-    int restaurant_id;
-    int id;
+    private String name;
+    private int restaurant_id;
+    private int id;
 
     public String getName() {
         return this.name;

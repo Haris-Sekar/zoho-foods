@@ -3,8 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,27 +23,50 @@ public class Category extends HttpServlet {
 		try {
 			Dbconnection db = new Dbconnection();
 			Connection con = db.initializeDatabase();
-			HttpSession session = req.getSession();
-
-			String email = session.getAttribute("email").toString();
-			System.out.println("email: " + email);
-			String query = "select * from food_category where restaurant_id = (select id from restaurant where email = ?)";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, email);
-			ResultSet rs = pstmt.executeQuery();
-			List<models.Category> categories = new ArrayList<models.Category>();
-			while (rs.next()) {
-				models.Category category = new models.Category();
-				category.setId(rs.getInt("id"));
-				category.setName(rs.getString("name"));
-				categories.add(category);
+			String get = req.getParameter("get");
+			System.out.println(get);
+			if (get != null) {
+				System.out.println("inside if");
+				int get1 = Integer.parseInt(get);
+				if (get1 == 1) {
+					String catQuery = "select * from food_category group by name";
+					List<models.Category> catList = new ArrayList<models.Category>();
+					Statement st = con.createStatement();
+					ResultSet rs1 = st.executeQuery(catQuery);
+					while (rs1.next()) {
+						models.Category cat = new models.Category();
+						cat.setId(rs1.getInt("id"));
+						cat.setName(rs1.getString("name"));
+						cat.setRestaurant_id(rs1.getInt("restaurant_id"));
+						catList.add(cat);
+					}
+					res.setContentType("application/json");
+					res.setCharacterEncoding("UTF-8");
+					String allCategory = new Gson().toJson(catList.toArray());
+					out.write(allCategory);
+				}
+			} else {
+				HttpSession session = req.getSession();
+				String email = session.getAttribute("email").toString();
+				System.out.println("emailzxcv: " + email);
+				String query = "select * from food_category where restaurant_id = (select id from restaurant where email = ?)";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, email);
+				ResultSet rs = pstmt.executeQuery();
+				List<models.Category> categories = new ArrayList<models.Category>();
+				while (rs.next()) {
+					models.Category category = new models.Category();
+					category.setId(rs.getInt("id"));
+					category.setName(rs.getString("name"));
+					categories.add(category);
+				}
+				String result = new Gson().toJson(categories.toArray());
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+				out.write(result);
+				out.flush();
+				con.close();
 			}
-			String result = new Gson().toJson(categories.toArray());
-			res.setContentType("application/json");
-			res.setCharacterEncoding("UTF-8");
-			out.write(result);
-			out.flush();
-			con.close();
 		} catch (Exception e) {
 			System.out.print(e);
 			models.Result result = new models.Result();
@@ -98,7 +120,7 @@ public class Category extends HttpServlet {
 				String output = new Gson().toJson(result);
 				out.print(output);
 			} else if (type.equals("delete")) {
-				String deleteFoods = "delete from food where category_id = ?";
+				String deleteFoods = "delete from foods where category_id = ?";
 				String query2 = "DELETE FROM food_category WHERE id = ? ";
 				PreparedStatement ps = con.prepareStatement(query2);
 				PreparedStatement ps1 = con.prepareStatement(deleteFoods);

@@ -1,26 +1,30 @@
 .foods{
     display: flex;
     flex-wrap: wrap;
-    margin: 1%;
+    margin: 0 3%; 
 }
 
 .card{
     border: 2px solid #293241;
-    /* width: 30%; */
-    width: fit-content;
+    max-width: 15%;
+/*     width: fit-content; */
     /* background-color: white; */
-    margin: 1% ;
+    margin: 1%;
     border-radius: 10px;
-    padding: 1% ;
-    
+    padding: 1%; 
+  display:flex;
+  flex-direction:column;
 
 }
 
 .card .imgContainer{
-    width: 350px;
+    width: 100%; 
     height: 175px; 
-    overflow: hidden;
-
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 .card .imgContainer img{
@@ -34,7 +38,7 @@
 }
 
 .card .foodDetails{ 
-    padding: 5% 0 0 5%;
+    padding: 5% 0 0 0;
 }
 
 .card .foodDetails #foodName{
@@ -136,7 +140,7 @@
 }
 
 
-.card #btnContainer #btn1:hover , #btn2:hover{
+.card #btnContainer .btn1:hover , .btn2:hover{
     transform: scale(1.1); 
 }
 

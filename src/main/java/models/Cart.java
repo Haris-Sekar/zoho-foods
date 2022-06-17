@@ -1,19 +1,21 @@
 package models;
 
 public class Cart {
-    int id;
-    String name;
-    String description;
-    String image;
-    String categoryName;
-    float price;
-    float discount;
-    int quantity;
-    String res_name;
-    String area;
-    String town;
-    String type;
-    int res_id;
+    private int id;
+    private String name;
+    private String description;
+    private String image;
+    private String categoryName;
+    private float price;
+    private float discount;
+    private int quantity;
+    private String res_name;
+    private String area;
+    private String town;
+    private String type;
+    private int res_id;
+    private int userId;
+    private String foodType;
 
     public int getRes_id() {
         return this.res_id;
@@ -62,9 +64,6 @@ public class Cart {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    int userId;
-    String foodType;
 
     public String getFoodType() {
         return this.foodType;

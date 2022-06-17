@@ -23,10 +23,10 @@
         <div id="loading-content"></div>
     </div>
     <div class="alert" hidden id="alert">
-		<div class="alert-content-container">
-			<div class="alert-content">
-				<form method="post" id="rating">
-					<div class="alert-text">
+        <div class="alert-content-container">
+            <div class="alert-content">
+                <form method="post" id="rating">
+                    <div class="alert-text">
                         <p>Please rate the Restaurant</p>
                         <div class="numberCon">
                             <div class="number" id="number-1" onclick="clicked(1)">1</div>
@@ -38,22 +38,23 @@
                         <p>And your valuable reviews will help other users and restaurants</p>
                         <input type="text" id="rating1" name="rating" value="" hidden>
                         <input type="text" id="resId" name="resId" value="" hidden>
-						<textarea name="review" id="review" cols="55" rows="4" placeholder="Your valuable reviews"></textarea>
-					</div>
-					<div class="alert-button">
-						<button type="button" class="alert-button-text" onclick="postReview()">Post</button>
-						<button type="button" class="alert-button-text-cancel" onclick="closeAlert()">Cancel</button>
-					</div>
-				</form>
+                        <textarea name="review" id="review" cols="55" rows="4"
+                            placeholder="Your valuable reviews"></textarea>
+                    </div>
+                    <div class="alert-button">
+                        <button type="button" class="alert-button-text" onclick="postReview()">Post</button>
+                        <button type="button" class="alert-button-text-cancel" onclick="closeAlert()">Cancel</button>
+                    </div>
+                </form>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <div class="orderSuccess" id="orderSuccess">
         <div class="orderCon">
             <div class="imgCon">
-                <lord-icon src="https://cdn.lordicon.com/hjeefwhm.json" trigger="loop"  colors="primary:#ffffff" delay="1000"
-                    style="width:100px;height:100px;">
+                <lord-icon src="https://cdn.lordicon.com/hjeefwhm.json" trigger="loop" colors="primary:#ffffff"
+                    delay="1000" style="width:100px;height:100px;">
                 </lord-icon>
             </div>
             <div class="successText">Order Successful</div>
@@ -70,20 +71,29 @@
         <div class="navContent">
             <a href="./restaurant.html" class="navConText">Restaurants</a>
             <a href="./orders.html" class="navConText">Orders</a>
-            <a href="" class="navConText">Cart(<span id="cartNo">0</span>)</a>
+            <a href="" class="navConText">
+                <div class="navCart">
+                    <div class="navCart-icon">
+                        <img src="../assets/images/cart.png" alt="">
+                    </div>
+                    <div class="navCart-badge"><span id="cartNo">0</span></div>
+                </div>
+            </a>
             <div class="profilePic" id="profilePic">
-				<div class="imgCon" id="imgConProfile"></div>
-				<div class="dropDown" id="dropDown">
-					<a href="./account.html" class="navConText1">Account</a>
-					<div class="navConText1" onclick="logout()">Logout</div>
-				</div>
-			</div>
+                <div class="imgCon" id="imgConProfile"></div>
+                <div class="dropDown" id="dropDown">
+                    <a href="./account.html" class="navConText1">Account</a>
+                    <div class="navConText1" onclick="logout()">Logout</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="emptyCart" id="emptyCart" hidden>
         <div class="imgCon"><img src="../assets/images/empty-box.png" alt=""></div>
         <div id="text">Looks like nothing in the cart, its just take a minute to take away your favorite</div>
-        <a href="./restaurant.html"><div id="btnCenter"> <button id="emptyBtn">Take Me</button></div></a>
+        <a href="./restaurant.html">
+            <div id="btnCenter"> <button id="emptyBtn">Take Me</button></div>
+        </a>
 
     </div>
     <div class="cart" id="cart">
@@ -123,7 +133,7 @@
                 <div id="totSave1">0pih</div>
             </div>
         </div>
-    </div> 
+    </div>
 </body>
 
 </html>
@@ -133,4 +143,3 @@
 <script src="../assets/js/validation/user.js"></script>
 <script src="../assets/js/userLogout.js"></script>
 <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
- 

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../assets/css/restaurantCard.css">
 	<link rel="stylesheet" href="../assets/css/loader.css">
 	<link rel="stylesheet" href="../assets/css/home.css">
+	<link rel="stylesheet" href="../assets/css/search.css">
 	<link rel="import" href="../index.html">
 
 </head>
@@ -29,7 +30,14 @@
 		<div class="navContent">
 			<a href="./restaurant.html" class="navConText">Restaurants</a>
 			<a href="./orders.html" class="navConText">Orders</a>
-			<a href="./cart.html" class="navConText">Cart(<span id="cartNo">0</span>)</a>
+			<a href="./cart.html" class="navConText">
+				<div class="navCart">
+					<div class="navCart-icon">
+						<img src="../assets/images/cart.png" alt="">
+					</div>
+					<div class="navCart-badge"><span id="cartNo">0</span></div>
+				</div>
+			</a>
 			<div class="profilePic" id="profilePic">
 				<div class="imgCon" id="imgConProfile"></div>
 				<div class="dropDown" id="dropDown">
@@ -55,7 +63,12 @@
 				<input type="text" name="" id="search" placeholder="Search your favorite Restaurant or foods"
 					autocomplete="off">
 				<div class="searchIcon"><img src="../assets/images/search.png" alt=""></div>
-			</div>
+			</div><br>
+		</div>
+		<div class="searchRes" id="searchRes1">
+			<ul id="searchRes">
+				
+			</ul>
 		</div>
 	</div>
 
@@ -71,4 +84,4 @@
 <script src="../assets/js/restaurantCard.js"></script>
 <script src="../assets/js/validation/user.js"></script>
 <script src="../assets/js/userLogout.js"></script>
- 
+<script src="../assets/js/search.js"></script>

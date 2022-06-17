@@ -17,6 +17,12 @@ function login() {
         data: $('#loginForm').serialize(),
         error: (error) => {
             console.log(error);
+            toastsFactory.createToast({
+                type: 'error',
+                icon: 'exclamation-circle',
+                message: 'Invalid email or password',
+                duration: 5000
+            });  
         },
         success: (data) => {
             console.log(data);
@@ -26,8 +32,20 @@ function login() {
                 window.location.replace("../index.html");
             }
             else if(data.result === 'failure'){
-                
-            } 
+                toastsFactory.createToast({
+                    type: 'error',
+                    icon: 'exclamation-circle',
+                    message: 'Invalid email or password',
+                    duration: 5000
+                });                
+            } else {
+                toastsFactory.createToast({
+                    type: 'error',
+                    icon: 'exclamation-circle',
+                    message: data,
+                    duration: 5000
+                });
+            }
         }
 
     })

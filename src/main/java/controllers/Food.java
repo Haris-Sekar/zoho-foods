@@ -106,46 +106,76 @@ public class Food extends HttpServlet {
 		try {
 			Dbconnection db = new Dbconnection();
 			Connection con = db.initializeDatabase();
-			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-			String time = format.format(new Date(System.currentTimeMillis()));
+			String get = req.getParameter("get");
+			if (get != null) {
+				int get1 = Integer.parseInt(get);
+				if (get1 == 1) {
+					String query = "SELECT fd.id,fd.name,fd.restaurant_id,fd.food_type,res.name as res_name FROM foods as fd inner join restaurant as res on res.id = fd.restaurant_id where food_time_start < CURRENT_TIME() and food_time_end > CURRENT_TIME() and res.res_start_time < CURRENT_TIME() and res.res_end_time > CURRENT_TIME()";
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+					List<models.Food> foods = new ArrayList<models.Food>();
+					while (rs.next()) {
+						models.Food food = new models.Food();
+						food.setId(rs.getInt("id"));
+						food.setRestaurantId(rs.getInt("restaurant_id"));
+						food.setName(rs.getString("name"));
+						food.setType(rs.getString("food_type"));
+						food.setRestaurantName(rs.getString("res_name"));
+						foods.add(food);
+					}
+					res.setContentType("application/json");
+					res.setCharacterEncoding("UTF-8");
+					String res1 = new Gson().toJson(foods);
+					con.close();
+					out.write(res1);
+				}
+			} else {
 
-			System.out.println("time" + time);
-			HttpSession session = req.getSession();
-			String email = (String) session.getAttribute("email");
-			String resIdQuery = "SELECT id FROM restaurant WHERE email = '" + email + "'";
-			Statement stmt1 = con.createStatement();
-			ResultSet rs1 = stmt1.executeQuery(resIdQuery);
-			int resId = 0;
-			while (rs1.next()) {
-				resId = rs1.getInt("id");
-			}
+				SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+				String time = format.format(new Date(System.currentTimeMillis()));
 
-			String query = "select fd.id,fd.name,res.name as restaurant_name,fc.name as cat_name,fd.food_type,fd.food_description,fd.food_image,fd.price,fd.discount,fd.food_prep_time  from foods as fd inner join restaurant as res on fd.restaurant_id = res.id inner join food_category as fc on fd.category_id = fc.id where res.id = '"
-					+ resId + "' limit 50;";
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			res.setContentType("application/json");
-			res.setCharacterEncoding("UTF-8");
-			List<models.Food> foods = new ArrayList<models.Food>();
-			while (rs.next()) {
-				models.Food food = new models.Food();
-				food.setId(rs.getInt("id"));
-				food.setName(rs.getString("name"));
-				food.setPrice(rs.getFloat("price"));
-				food.setDiscount(rs.getFloat("discount"));
-				food.setType(rs.getString("food_type"));
-				food.setImage(rs.getString("food_image"));
-				food.setDescription(rs.getString("food_description"));
-				food.setRestaurantName(rs.getString("restaurant_name"));
-				food.setTime(rs.getInt("food_prep_time"));
-				food.setCategory(rs.getString("cat_name"));
-				foods.add(food);
+				System.out.println("time" + time);
+				HttpSession session = req.getSession();
+				String email = (String) session.getAttribute("email");
+				String resIdQuery = "SELECT id FROM restaurant WHERE email = '" + email + "'";
+				Statement stmt1 = con.createStatement();
+				ResultSet rs1 = stmt1.executeQuery(resIdQuery);
+				int resId = 0;
+				while (rs1.next()) {
+					resId = rs1.getInt("id");
+				}
+
+				String query = "select fd.id,fd.name,res.name as restaurant_name,fc.name as cat_name,fd.food_type,fd.food_description,fd.food_image,fd.price,fd.discount,fd.food_prep_time,fd.stock,fc.id as cat_id,fd.food_time_start, fd.food_time_end from foods as fd inner join restaurant as res on fd.restaurant_id = res.id inner join food_category as fc on fd.category_id = fc.id where res.id = '"
+						+ resId + "' limit 50;";
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+				List<models.Food> foods = new ArrayList<models.Food>();
+				while (rs.next()) {
+					models.Food food = new models.Food();
+					food.setId(rs.getInt("id"));
+					food.setName(rs.getString("name"));
+					food.setPrice(rs.getFloat("price"));
+					food.setDiscount(rs.getFloat("discount"));
+					food.setType(rs.getString("food_type"));
+					food.setImage(rs.getString("food_image"));
+					food.setDescription(rs.getString("food_description"));
+					food.setRestaurantName(rs.getString("restaurant_name"));
+					food.setTime(rs.getInt("food_prep_time"));
+					food.setCategory(rs.getString("cat_name"));
+					food.setStock(rs.getInt("stock"));
+					food.setCat_id(rs.getInt("cat_id"));
+					food.setStime(rs.getString("food_time_start"));
+					food.setEtime(rs.getString("food_time_end"));
+					foods.add(food);
+				}
+				String res1 = new Gson().toJson(foods.toArray());
+				res.setContentType("application/json");
+				res.setCharacterEncoding("UTF-8");
+				out.print(res1);
+				con.close();
 			}
-			String res1 = new Gson().toJson(foods.toArray());
-			res.setContentType("application/json");
-			res.setCharacterEncoding("UTF-8");
-			out.print(res1);
-			con.close();
 		} catch (Exception e) {
 			models.Result result = new models.Result();
 			result.setMessage(e.getMessage());

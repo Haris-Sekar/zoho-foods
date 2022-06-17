@@ -87,10 +87,16 @@ function specificOrder(id) {
 
   orderDetailsCon.style.display = "block";
   const orderDetailsDisplay = document.getElementById("orderDetailsDisplay");
-  orderDetailsDisplay.innerHTML = "<tr> <th>Name</th> <th>Food Type</th> <th>Quantity</th> <th>Price</th> </tr>";
   // console.log(orderData);
   const data = orderData.filter((ele) => ele.orderId === id);
   console.log(data);
+  var date = new Date(data[0].timeCreated);
+    const timestamp =
+      date.toLocaleDateString() +
+      " " +
+      date.toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+  orderDetailsDisplay.innerHTML = `<tr style="background-color: #239241"><th>${data[0].resName}</th><th>${timestamp}</th><th></th><th></th></tr>`;
+  orderDetailsDisplay.innerHTML += "<tr style='background-color: #EE6C4D'> <th>Name</th> <th>Food Type</th> <th>Quantity</th> <th>Price</th> </tr>";
   data.forEach((ele) => {
     var foodType = "";
     if (ele.foodType === "veg") {

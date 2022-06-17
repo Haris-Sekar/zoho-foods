@@ -5,11 +5,14 @@
 }
 
 .profileContainer .menu{
-    border: 2px solid black ;
+    border: 2px solid #adb5bd ;
     height: 100%;
+    border-radius: 10px;
+    padding: 1% 2%;
     width: 30%;
     border-right: 0;
-}
+    font-size: 20px;
+} 
 
 .profileContainer .menu ul{
     padding: 0;
@@ -18,12 +21,16 @@
 
 .profileContainer .menu ul li{
     list-style: none;
-    padding: 7% 10%;  
+    padding: 4% 10%;
+    margin: 3% 0;  
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 }
 
 
 .profileContainer .contentPage{
-    border: 2px solid black ;
+    border: 2px solid #adb5bd ;
+    border-radius: 10px;
     height: 100%;
     width: 70%;
 }
@@ -53,13 +60,17 @@ table td .imgCon img{
     border-radius: 50%;
 }
 
-input[type=text],input[type=email],input[type=number]{
+input[type=text],input[type=email],input[type=number],input[type=password]{
     width: 100%;
-    padding: 5%;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: auto;
-    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Rubik', sans-serif; 
+    margin: none;
+    padding: 10px;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px; 
+    border: 2px solid #adb5bd;
 }
 
 input[type="file"] {
@@ -75,6 +86,12 @@ input[type="file"] {
     border: 2px solid white;
     background-color: white;
   }
+
+  input:focus{
+    outline: none;
+    transition: 0.3s ease-in-out;
+    border-bottom: 4px solid #EE6C4D;
+}
 
 .save{
     font-size:20px;
@@ -106,3 +123,40 @@ input[type="file"] {
     cursor:pointer;
     transition:0.3s ease-in-out;
 }
+
+#err{
+    font-size: 20px;
+    color: red;
+    border: 2px solid transparent;
+    /* background-color: #ffffff; */
+    width: 100%;
+    font-family: 'Rubik', sans-serif;
+    padding: 1%;
+    border-radius: 10px;
+}
+
+#err ul li{
+    color: #000000;
+    list-style: none;
+    line-height: 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#err ul li span{
+    height: 25px;
+    width: 25px;
+    margin: 2%;
+}
+#err ul li span img{
+    height: 25px;
+    width: 25px;
+    transition: 0.3s ease-in-out;
+}
+
+
+#editProfile{
+    border-left: 5px solid black;
+    background-color: #f1f1f1;
+} 

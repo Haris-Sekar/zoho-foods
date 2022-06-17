@@ -51,7 +51,7 @@ public class RestaurantFood extends HttpServlet {
 				food.setTime(Integer.parseInt(rs.getString("food_prep_time")));
 				foods.add(food);
 			}
-			String getResDetailQuery = "select res.id, res.name, res.area, res.town, res.state, res.res_start_time, res.res_end_time, res.res_type, avg(rev.rating) as rating from restaurant as res inner join review as rev on rev.res_id = res.id where res.id = '"
+			String getResDetailQuery = "select res.id, res.name, res.area, res.town, res.state, res.res_start_time, res.res_end_time, res.res_type, avg(rev.rating) as rating from restaurant as res left join review as rev on rev.res_id = res.id where res.id = '"
 					+ id + "'";
 			ResultSet rs1 = st.executeQuery(getResDetailQuery);
 			models.Restaurant restaurant = new models.Restaurant();

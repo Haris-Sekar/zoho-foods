@@ -70,17 +70,20 @@ public class Users extends HttpServlet {
                         String name = req.getParameter("name");
                         String phone = req.getParameter("phone");
                         String changeEmail = req.getParameter("email");
-                        Part filePart = req.getPart("file");
-                        String fileName = filePart.getSubmittedFileName();
-                        fileName = name + "-" + fileName;
-                        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY
-                                + "\\profilePic\\";
-                        File uploadDir = new File(uploadPath);
-                        if (!uploadDir.exists()) {
-                            uploadDir.mkdir();
-                        }
-                        for (Part part : req.getParts()) {
-                            part.write(uploadPath + fileName);
+                        String fileName = req.getParameter("fileName");
+                        if (fileName == null) {
+                            Part filePart = req.getPart("file");
+                            fileName = filePart.getSubmittedFileName();
+                            fileName = name + "-" + fileName;
+                            String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY
+                                    + "\\profilePic\\";
+                            File uploadDir = new File(uploadPath);
+                            if (!uploadDir.exists()) {
+                                uploadDir.mkdir();
+                            }
+                            for (Part part : req.getParts()) {
+                                part.write(uploadPath + fileName);
+                            }
                         }
                         String query = "UPDATE users SET name = '" + name + "', phone_number = '" + phone
                                 + "', profile_pic = '"
