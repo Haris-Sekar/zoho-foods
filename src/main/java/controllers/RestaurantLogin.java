@@ -20,7 +20,8 @@ public class RestaurantLogin extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			String email;
 			email = req.getParameter("resEmail");

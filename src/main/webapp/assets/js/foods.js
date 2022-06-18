@@ -167,7 +167,7 @@ function foodAdd() {
   $.ajax({
     method: "POST",
     ecnType: "multipart/form-data",
-    url: "../../Food",
+    url: "../../Food/add",
     data: data,
     cache: false,
     processData: false,
@@ -213,6 +213,7 @@ fetchAllFoods();
 
 function renderFood(foods) {
   const renderFoods = document.getElementById("renderFoods");
+  renderFoods.innerHTML = "";
   foods.forEach((food) => {
     const data = `<div class="card">
       <div class="imgContainer">
@@ -243,10 +244,11 @@ function renderFood(foods) {
     renderFoods.innerHTML += data;
   });
 }
-
+var data1 = [];
 function editFood(id) {
   displayAddFood();
   const data = foodList.filter((food) => food.id == id);
+  data1 = data;
   const text = document.getElementById("text");
   console.log(data[0]);
   text.innerHTML = "Edit Food";
@@ -260,6 +262,7 @@ function editFood(id) {
   const type2 = document.getElementById("type2");
   const stime = document.getElementById("stime");
   const etime = document.getElementById("etime");
+  const food_id = document.getElementById("food_id");
   const prepTime = document.getElementById("prepTime");
   name.value = data[0].name;
   desc.value = data[0].description;
@@ -271,12 +274,97 @@ function editFood(id) {
   stime.value = data[0].stime;
   etime.value = data[0].etime;
   prepTime.value = data[0].prepTime;
+  food_id.value = data[0].id;
   const fileCon = document.getElementById("fileCon");
-  fileCon.innerHTML = `<div class="imgCon" id="foodPicPreview"><img src="../../uploads/foodsPic/${data[0].image}" alt=""> <button class="imgDelete" onclick="deleteFoodImg()">Delete</button></div>`;
+  if (data[0].image === "default.png") {
+    fileCon.innerHTML = `<input type="file" name="file" id="ajaxfile" />`;
+  } else {
+    fileCon.innerHTML = `<div class="imgCon" id="foodPicPreview"><img src="../../uploads/foodsPic/${data[0].image}" alt=""> <button type="button" class="imgDelete" onclick="deleteFoodImg()">Delete</button></div>`;
+  }
+  const submit = document.getElementById("edtFoodSubmit");
+  submit.value = "Update";
+  submit.onclick = () => {
+    updateFood();
+  }
+}
+const loadingWrapper = document.getElementById("loading-wrapper");
 
+function updateFood() {
+  loadingWrapper.hidden = "false";
+  var form = $("#addFoodForm")[0];
+  var data = new FormData(form);
+  data.append("file", ajaxfile.files[0]);
+  $.ajax({
+    method: "POST",
+    ecnType: "multipart/form-data",
+    url: "../../Food/edit",
+    data: data,
+    cache: false,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      console.log(data);
+      loadingWrapper.hidden = "true";
+      setTimeout(() => {
+        window.localStorage.setItem("tabAt", "food");
+        window.location.reload();
+      }, 5000);
+      toastsFactory.createToast({
+        message: "Food Updated Successfully",
+        type: "success",
+        duration: 5000,
+        icon: "check-circle",
+      }); 
+      fetchAllFoods();
+    },
+    error: function (err) {
+      console.log(err);
+    },
+  });
 }
 
+function deleteFoodImg() {
+  loadingWrapper.hidden = "false";
+  $.ajax({
+    method: "DELETE",
+    url: "../../Food/image?id=" + data1[0].id,
+    data: $("#addFoodForm").serialize(),
+    success: (data) => {
+      console.log(data);
+      loadingWrapper.hidden = "true";
+      toastsFactory.createToast({
+        message: "Food Image Deleted Successfully",
+        type: "success",
+        duration: 5000,
+        icon: "check-circle",
+      });
+      fileCon.innerHTML = `<input type="file" name="file" id="ajaxfile" />`;
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
 
-function deleteFoodImg(){
-  
+function deleteFood(id) {
+
+  loadingWrapper.hidden = "false";
+  $.ajax({
+    method: "DELETE",
+    url: "../../Food/deleteFood?id="+id,
+    success: (data) => {
+      console.log(data);
+      loadingWrapper.hidden = "true";
+      toastsFactory.createToast({
+        message: "Food Image Deleted Successfully",
+        type: "success",
+        duration: 5000,
+        icon: "check-circle",
+      }); 
+      fetchAllFoods();
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
 }

@@ -22,7 +22,8 @@ public class Users extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter out = res.getWriter();
         try {
-            Dbconnection db = new Dbconnection();
+            Dbconnection db = Dbconnection.getInstance();
+
             Connection con = db.initializeDatabase();
             HttpSession session = req.getSession();
             String email = (String) session.getAttribute("email");
@@ -63,7 +64,8 @@ public class Users extends HttpServlet {
                 if (type.equals("edit")) {
                     PrintWriter out = res.getWriter();
                     try {
-                        Dbconnection db = new Dbconnection();
+                        Dbconnection db = Dbconnection.getInstance();
+
                         Connection con = db.initializeDatabase();
                         HttpSession session = req.getSession();
                         String email = (String) session.getAttribute("email");
@@ -113,7 +115,8 @@ public class Users extends HttpServlet {
                 }
             } else {
                 System.out.println("type is null");
-                Dbconnection db = new Dbconnection();
+                Dbconnection db = Dbconnection.getInstance();
+
                 Connection con = db.initializeDatabase();
                 Statement stmt = con.createStatement();
                 String email = req.getParameter("email");
@@ -123,8 +126,8 @@ public class Users extends HttpServlet {
                 String query = "select * from users where email = '" + email + "' and password = '" + password + "'";
                 System.out.println(query);
                 ResultSet rs = stmt.executeQuery(query);
+                HttpSession session = req.getSession();
                 if (rs.next()) {
-                    HttpSession session = req.getSession();
                     session.setAttribute("email", email);
                     session.setAttribute("name", rs.getString("name"));
                     session.setAttribute("user_type", rs.getString("user_type"));

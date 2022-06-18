@@ -1,6 +1,6 @@
 package models;
 
-public class Food extends Restaurant{
+public class Food {
     private int id;
     private int restaurantId;
     private String name;

@@ -27,7 +27,8 @@ public class Password extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			HttpSession session = request.getSession();
 			String email = (String) session.getAttribute("email");

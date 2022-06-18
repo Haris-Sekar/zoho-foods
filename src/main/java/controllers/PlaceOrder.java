@@ -20,7 +20,8 @@ public class PlaceOrder extends HttpServlet {
 	public static int getLastOderId() {
 		int orderId = 1;
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			String query = "select max(order_id) as id from orders";
 			Statement st = con.createStatement();
@@ -39,7 +40,8 @@ public class PlaceOrder extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			int userId = Integer.parseInt(request.getParameter("userId"));
 			String query = "select ct.id,ct.user_id,ct.food_id,ct.quantity,fd.price,fd.discount from cart as ct inner join foods as fd on fd.id = ct.food_id where user_id = "

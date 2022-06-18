@@ -22,7 +22,7 @@ public class Cart extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
 			Connection con = db.initializeDatabase();
 			int food_id = Integer.parseInt(req.getParameter("foodId"));
 			int quantity = Integer.parseInt(req.getParameter("quantity"));
@@ -123,7 +123,8 @@ public class Cart extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			HttpSession session = req.getSession();
 			String email = (String) session.getAttribute("email");

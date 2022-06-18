@@ -24,7 +24,8 @@ public class Restaurant extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 			String time = format.format(new Date(System.currentTimeMillis()));

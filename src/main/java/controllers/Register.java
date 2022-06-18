@@ -24,7 +24,7 @@ public class Register extends HttpServlet {
 	String UPLOAD_DIRECTORY = "uploads";
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		Dbconnection db = new Dbconnection();
+		Dbconnection db = Dbconnection.getInstance();
 
 		System.out.println(req);
 		try {

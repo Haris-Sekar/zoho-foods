@@ -12,9 +12,14 @@
 	<link rel="stylesheet" href="../../assets/css/foodCard.css">
 	<link rel="stylesheet" href="../../assets/css/toast.css">
 	<link rel="stylesheet" href="../../assets/css/alert.css">
+	<link rel="stylesheet" href="../../assets/css/loader.css">
 </head>
 
 <body>
+	<div id="loading-wrapper" hidden>
+		<div id="loading-text">LOADING</div>
+		<div id="loading-content"></div>
+	</div>
 	<div class="navbar">
 		<div class="logo">
 			<a href="../../">
@@ -64,9 +69,9 @@
 					<label for="" id="time1">Food Preparation Time</label>
 					<label for="" id="image">Food Image</label> <br>
 					<input type="number" name="prepTime" id="prepTime" placeholder="in minutes">
-					<input type="text" name="type" value="" id="formtype" hidden>
+					<input type="number" name="id" id="food_id" hidden>
 					<span id="fileCon"><input type="file" name="file" id="ajaxfile" value=""><br></span>
-					<input type="button" value="Add Food" id="submit" onclick="foodAdd()"><br>
+					<input type="button" id="edtFoodSubmit" onclick="foodAdd()"><br>
 
 
 				</form>

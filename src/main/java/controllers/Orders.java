@@ -27,7 +27,8 @@ public class Orders extends HttpServlet {
 		System.out.println(time);
 		try {
 
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 
 			if (request.getParameter("for") != null) {
@@ -76,7 +77,7 @@ public class Orders extends HttpServlet {
 					userId = rs.getInt("id");
 				}
 				String getOrderQuery = "select od.order_id,od.price, od.quantity, od.time_created, fd.name as food_name, fd.food_type, res.name as res_name from orders as od inner join foods as fd on fd.id = od.food_id inner join restaurant as res on res.id = fd.restaurant_id where user_id = "
-						+ userId+" order by od.time_created desc";
+						+ userId + " order by od.time_created desc";
 				Statement st1 = con.createStatement();
 				ResultSet rs1 = st1.executeQuery(getOrderQuery);
 				List<models.Orders> orders = new ArrayList<models.Orders>();

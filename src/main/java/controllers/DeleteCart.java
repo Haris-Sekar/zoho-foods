@@ -21,7 +21,8 @@ public class DeleteCart extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			int cart_id = Integer.parseInt(request.getParameter("id"));
 			String query = "delete from cart where id = " + cart_id;

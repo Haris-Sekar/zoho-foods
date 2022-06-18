@@ -32,9 +32,10 @@ public class Review extends HttpServlet {
 				HttpSession session = request.getSession();
 				restaurant_id = (int) session.getAttribute("restaurant_id");
 			}
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
-			String query = "select rev.  from review as rev where res_id=" + restaurant_id +"";
+			String query = "select rev.  from review as rev where res_id=" + restaurant_id + "";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			List<models.Review> reviews = new ArrayList<models.Review>();
@@ -69,7 +70,8 @@ public class Review extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			int resId = Integer.parseInt(request.getParameter("resId"));
 			String review = request.getParameter("review");

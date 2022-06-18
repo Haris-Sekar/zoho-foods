@@ -21,7 +21,7 @@ public class Category extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
 			Connection con = db.initializeDatabase();
 			String get = req.getParameter("get");
 			System.out.println(get);
@@ -82,7 +82,8 @@ public class Category extends HttpServlet {
 
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			String type = req.getParameter("type");
 			String name = req.getParameter("name");

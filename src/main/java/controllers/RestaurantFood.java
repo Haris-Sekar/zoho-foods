@@ -26,7 +26,8 @@ public class RestaurantFood extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			int id = Integer.parseInt(req.getParameter("id"));
 			SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
@@ -86,11 +87,6 @@ public class RestaurantFood extends HttpServlet {
 			out.flush();
 
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 	}
 
 }

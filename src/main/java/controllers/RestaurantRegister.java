@@ -19,7 +19,8 @@ public class RestaurantRegister extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		try {
-			Dbconnection db = new Dbconnection();
+			Dbconnection db = Dbconnection.getInstance();
+
 			Connection con = db.initializeDatabase();
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
