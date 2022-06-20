@@ -64,7 +64,7 @@ function renderOrder(data) {
       orderObj.totQty += ele2.quantity;
     });
     data1.forEach((ele2) => {
-      orderObj.totPrice += ele2.foodPrice;
+      orderObj.totPrice += (ele2.foodPrice * ele2.quantity);
     });
     orderDet.push(orderObj);
   });
@@ -95,8 +95,8 @@ function specificOrder(id) {
       date.toLocaleDateString() +
       " " +
       date.toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-  orderDetailsDisplay.innerHTML = `<tr style="background-color: #239241"><th>${data[0].resName}</th><th>${timestamp}</th><th></th><th></th></tr>`;
-  orderDetailsDisplay.innerHTML += "<tr style='background-color: #EE6C4D'> <th>Name</th> <th>Food Type</th> <th>Quantity</th> <th>Price</th> </tr>";
+  orderDetailsDisplay.innerHTML = `<tr style="background-color: #239241"><th>${data[0].resName}</th><th>${timestamp.split(" ")[0]}</th><th>${timestamp.split(" ")[1]} ${timestamp.split(" ")[2]}</th><th></th><th></th></tr>`;
+  orderDetailsDisplay.innerHTML += "<tr style='background-color: #EE6C4D'> <th>Name</th> <th>Food Type</th><th>Food Price</th> <th>Quantity</th> <th>Net Price</th> </tr>";
   data.forEach((ele) => {
     var foodType = "";
     if (ele.foodType === "veg") {
@@ -107,8 +107,9 @@ function specificOrder(id) {
     const orderDet = `<tr>
         <td>${ele.foodName}</td>
         <td>${foodType}</td>
+        <td>${ele.foodPrice}</td>
         <td>${ele.quantity}</td>
-        <td>₹ ${ele.foodPrice}/-</td>
+        <td>₹ ${ele.foodPrice * ele.quantity}/-</td>
     </tr>`;
     orderDetailsDisplay.innerHTML += orderDet;
   });

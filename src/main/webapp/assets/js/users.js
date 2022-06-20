@@ -93,25 +93,6 @@ document.addEventListener("keyup", () => {
 //getting userData
 
 function registerUser() {
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("signupPassword").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  var userData = {
-    name: name,
-    email: email,
-  };
-
-  //ajax call to register user
-  userData = JSON.stringify(userData);
-  console.log($("#registerForm").serialize());
-  function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
   var formData = $("#registerForm")[0];
   var formData1 = new FormData(formData);
   formData1.append("file", file.files[0]);

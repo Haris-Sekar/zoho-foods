@@ -1,17 +1,16 @@
 var restaurants = [];
 const loadingWrapper = document.getElementById("loading-wrapper");
-var restaurantNames = [];
+var restaurantNames = []; 
 function fetchRestaurant() {
-  loadingWrapper.hidden = false;
-  // console.log(window.location.search);
+  loadingWrapper.hidden = false; 
   var url;
   if (
     window.location.href === "http://localhost:8080/Zoho_Food/" ||
     window.location.href === "http://localhost:8080/Zoho_Food/index.html"
   ) {
-    url = "Restaurant";
+    url = "Restaurant/forCard";
   } else {
-    url = "../Restaurant";
+    url = "../Restaurant/forCard";
   }
   $.ajax({
     method: "GET",
@@ -76,16 +75,25 @@ function renderRestaurant() {
     );
     // if(res.resStartTime)
     var imgUrl;
+    var resUrl;
     if (
       window.location.href === "http://localhost:8080/Zoho_Food/" ||
       window.location.href === "http://localhost:8080/Zoho_Food/index.html"
     ) {
       imgUrl = "./assets/images/res.jpg";
+      resUrl = "./template/";
     } else {
       imgUrl = "../assets/images/res.jpg";
+      resUrl = "./";
     }
+    var rating = res.rating;
+    rating = rating.toFixed(1); 
+    var totRating =
+      parseInt(Math.floor(rating)) * 20 +
+      (rating - parseInt(Math.floor(rating))) * 20; 
+
     const card = `
-        <a href ="./restaurantFood.html?id=${res.id}" class="res">
+        <a href ="${resUrl}restaurantFood.html?id=${res.id}" class="res">
         <div class="resCard">
         <div class="resDetails">
             <div class="img">
@@ -99,8 +107,28 @@ function renderRestaurant() {
                 )} - ${time24HrTo12hr(res.resEndTime)}</div>
                 <div id="resType">${resType}</div>
                 
-            ${(res.rating == 0)?"":`<div id="ratingCon">
-            <div class="imgCon"><img src="../assets/images/star.png" alt=""></div><div id="ratingText">${res.rating}</div> </div>`}
+            ${
+              res.rating == 0
+                ? ""
+                : ` 
+                <div class="star-rating" title="${totRating}%">
+    <div class="back-stars">
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <i class="fa fa-star" aria-hidden="true"></i>
+        
+        <div class="front-stars" style="width: ${totRating}%">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>  `
+            }
             
        
             </div>
@@ -111,3 +139,8 @@ function renderRestaurant() {
     resCardId.innerHTML += card;
   });
 }
+
+$(document).ready(function () {
+  var star_rating_width = $(".fill-ratings span").width();
+  $(".star-ratings").width(star_rating_width);
+});

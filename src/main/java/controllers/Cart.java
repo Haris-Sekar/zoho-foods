@@ -2,6 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import java.util.*;
-import java.sql.*;
+import models.Result;
+import models.CartModel;
 
 @WebServlet("/Cart")
 public class Cart extends HttpServlet {
@@ -52,7 +57,7 @@ public class Cart extends HttpServlet {
 			System.out.println("resIdFromDB: " + resIdFromDB);
 			System.out.println("ResFromAPI: " + res_id);
 			if (count > 0 && res_id != resIdFromDB) {
-				models.Result res1 = new models.Result();
+				Result res1 = new Result();
 				res.setContentType("application/json");
 				res.setCharacterEncoding("UTF-8");
 				res1.setResult("failure");
@@ -82,9 +87,9 @@ public class Cart extends HttpServlet {
 				String cartQuery = "select  res.name as res_name, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on fd.restaurant_id = res.id where ct.user_id = "
 						+ user_id;
 				rs = st.executeQuery(cartQuery);
-				List<models.Cart> carts = new ArrayList<models.Cart>();
+				List<CartModel> carts = new ArrayList<CartModel>();
 				while (rs.next()) {
-					models.Cart cart = new models.Cart();
+					CartModel cart = new CartModel();
 					cart.setId(rs.getInt("id"));
 					cart.setUserId(user_id);
 					cart.setName(rs.getString("name"));
@@ -158,9 +163,9 @@ public class Cart extends HttpServlet {
 				String cartQuery = "select res.name as res_name,res.id as res_id, res.area as area, res.town as town, res.res_type as type,ct.id,fd.name,fd.food_type, fc.name as categoryName,fd.food_description,fd.food_image, fd.price,fd.discount,ct.quantity from cart as ct inner join foods as fd on fd.id = ct.food_id inner join food_category as fc on fd.category_id = fc.id inner join restaurant as res on res.id = fd.restaurant_id where ct.user_id = "
 						+ user_id;
 				rs = st.executeQuery(cartQuery);
-				List<models.Cart> carts = new ArrayList<models.Cart>();
+				List<CartModel> carts = new ArrayList<CartModel>();
 				while (rs.next()) {
-					models.Cart cart = new models.Cart();
+					CartModel cart = new CartModel();
 					cart.setId(rs.getInt("id"));
 					cart.setUserId(user_id);
 					cart.setName(rs.getString("name"));

@@ -1,6 +1,6 @@
 package models;
 
-public class Review {
+public class Review extends Users {
     int id;
     int resId;
     int userId;
@@ -14,7 +14,7 @@ public class Review {
 
     public void setDate(String date) {
         this.date = date;
-    } 
+    }
 
     public int getId() {
         return this.id;

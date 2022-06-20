@@ -191,7 +191,7 @@ function clicked(num) {
 function postReview(){
   $.ajax({
     method: "POST",
-    url: "../Review",
+    url: "../Review/addReview",
     data: $("#rating").serialize(),
     success: (data) => {
       console.log(data);

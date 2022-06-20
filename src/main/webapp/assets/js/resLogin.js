@@ -1,7 +1,7 @@
 function login() {
     $.ajax({
         method:'POST',
-        url:'../../RestaurantLogin',
+        url:'../../Restaurant/login',
         data: $('#loginForm').serialize(),
         success: function(data) {
             if(data.result == 'success') {

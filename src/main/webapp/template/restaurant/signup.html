@@ -28,7 +28,7 @@
     </div>
     <div class="signupContainer">
         <div class="signup">
-            <form method="post" id="registerForm">
+            <form method="post" id="registerForm" enctype="multipart/form-data">
                 <div id="text">Signup</div>
                 <input type="text" name="name" placeholder="Name" autocomplete="off" id="name" required>
                 <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
@@ -95,6 +95,8 @@
                         <li><span><img src="../../assets/images/remove.png" alt="" srcset="" id="errImg6"></span>Password must be atleast 6 characters</li>
                     </ul>
                 </div>
+                <label for="" id="time">Restaurant Image</label><br>
+                <input type="file" name="file" id="resImg"><br>
                 <input type="button" value="signup" id="submit" onclick="registerUser()"><br>
                 <a href="" id="forgetPass">Forget password?</a> <br>
                 <div id="signup">Already have an account in Zoho Foods? <a href="./login.html" id="forgetPass">Login</a>

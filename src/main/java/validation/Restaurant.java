@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 @WebServlet("/RestaurantValidation")
-public class RestaurantValidation extends HttpServlet {
+public class Restaurant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -30,6 +30,7 @@ public class RestaurantValidation extends HttpServlet {
 				models.Users user = new models.Users();
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
+				user.setProfilePic(rs.getString("res_img"));
 				user.setResult("success");
 				String result = new Gson().toJson(user);
 				res.setContentType("application/json");

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Zoho Foods</title>
+	<link rel="stylesheet" href="../../assets/css/alert.css">
+	<link rel="stylesheet" href="../../assets/css/navbar.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="../../assets/css/loader.css">
+	<link rel="stylesheet" href="../../assets/css/account.css">
+	<link rel="stylesheet" href="../../assets/css/toast.css">
+	<link rel="stylesheet" href="../../assets/css/toggleBtn.css">
+</head>
+
+<body>
+	<div id="loading-wrapper" hidden>
+		<div id="loading-text">LOADING</div>
+		<div id="loading-content"></div>
+	</div>
+	<div class="alert" hidden id="alert">
+		<div class="alert-content-container">
+			<div class="alert-content">
+				<form method="post" id="editProfilePic" enctype="multipart/form-data">
+					<div class="alert-text">
+						<input type="file" name="file" id="file">
+					</div>
+					<div class="alert-button">
+						<button type="button" class="alert-button-text" onclick="updateProfilePic()">Update</button>
+						<button type="button" class="alert-button-text-cancel" onclick="closeAlert()">Cancel</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<div class="navbar">
+		<div class="logo">
+			<a href="../../">
+				<img src="../../assets/images/logoRes.png" alt="">
+			</a>
+		</div>
+		<div class="navContent">
+			<a href="./food.html" class="navConText">Foods</a>
+			<a href="./orders.html" class="navConText">Orders</a>
+			<a href="./review.html" class="navConText">Review/Ratings</a>
+			<div class="profilePic" id="profilePic">
+				<div class="imgCon" id="imgConProfile"></div>
+				<div class="dropDown" id="dropDown">
+					<a href="./account.html" class="navConText1">Account</a>
+					<div class="navConText1" onclick="logout()">Logout</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="profileContainer">
+		<div class="menu">
+			<ul>
+				<li id="editProfile" onclick="editProfile1()">Edit Profile</li>
+				<li id="passwordChange" onclick="passwordChange1()">Change Password</li>
+			</ul>
+		</div>
+		<div class="contentPage" id=userEdit>
+			<table>
+				<tr>
+					<td>
+						<div class="imgCon" id="profilePic1"></div>
+					</td>
+					<td id="profile">
+						<div id="changeProfile" onclick="profileChange()">Change Restaurant Photo</div>
+					</td>
+				</tr>
+				<form method="post" id="updateForm">
+					<input style="display: none;" type="text" name="fileName" id="fileName" value="" hidden>
+					<input style="display: none;" type="text" name="type" id="type" value="edit" hidden>
+					<tr>
+						<td>Name</td>
+						<td id="nameCon"><input type="text" name="name" value="" id="name"></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td id="emailCon"><input type="email" name="email" value="" id="email"></td>
+					</tr>
+					<tr>
+						<td>Phone</td>
+						<td id="phoneCon"><input type="number" name="phone" value="" id="phone"></td>
+					</tr>
+					<tr>
+						<td>area</td>
+						<td id="areaCon"><input type="text" name="area" value="" id="area"></td>
+					</tr>
+					<tr>
+						<td>town</td>
+						<td id="townCon"><input type="text" name="town" value="" id="town"></td>
+					</tr>
+					<tr>
+						<td>state</td>
+						<td id="phoneCon"><input type="text" name="state" value="" id="state"></td>
+					</tr>
+					<tr>
+						<td>pin code</td>
+						<td id="phoneCon"><input type="number" name="pinCode" value="" id="pinCode"></td>
+					</tr>
+					<tr>
+						<td>Restaurant Start Time</td>
+						<td id="phoneCon"><input type="time" name="stime" value="" id="stime"></td>
+					</tr>
+					<tr>
+						<td>Restaurant End Time</td>
+						<td id="phoneCon"><input type="time" name="etime" value="" id="etime"></td>
+					</tr>
+					<tr>
+						<td>Restaurant Status</td>
+						<td id="phoneCon">
+							<div class="switch switch--horizontal switch--expanding-inner">
+								<input id="radio-i" value="false" type="radio" name="isActive" checked="checked"/>
+								<label for="radio-i">Closed</label>
+								<input id="radio-j" value="true" type="radio" name="isActive"/>
+								<label for="radio-j">Open</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
+							  </div>
+						</td>
+					</tr>
+				</form>
+			</table>
+			<div class="save" id="save">Save</div>
+		</div>
+		<div class="contentPage" id="passwordCon" hidden>
+			<table>
+				<form method="post" id="passwordChangeForm">
+					<tr>
+						<td>New Password</td>
+						<td id=""><input type="password" name="newPassword" value="" id="password"></td>
+					</tr>
+					<tr>
+						<td>Confirm Password</td>
+						<td id="phoneCon"><input type="password" name="conPassword" value="" id="conPassword"></td>
+					</tr>
+				</form>
+			</table>
+			<div id="err">
+				<ul>
+					<li><span><img src="../../assets/images/remove.png" alt="" srcset="" id="errImg6"></span>Password
+						must be atleast 6 characters</li>
+				</ul>
+			</div>
+			<div class="save" id="change">Change</div>
+		</div>
+
+	</div>
+</body>
+
+</html>
+<script src="../../assets/js/toast.js"></script>
+<script src="../../assets/js/alert.js"></script>
+<script src="../../assets/js/validation/restaurant.js"></script>
+<script src="../../assets/js/logout.js"></script>
+<script src="../../assets/js/resAccount.js"></script>

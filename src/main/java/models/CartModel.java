@@ -1,6 +1,6 @@
 package models;
 
-public class Cart {
+public class CartModel {
     private int id;
     private String name;
     private String description;

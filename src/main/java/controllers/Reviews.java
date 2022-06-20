@@ -1,13 +1,7 @@
 package controllers;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
@@ -15,60 +9,49 @@ import com.google.gson.Gson;
 
 import java.sql.*;
 
-@WebServlet("/Review")
+public class Reviews extends HttpServlet {
+	public String getReview(HttpServletRequest req) {
 
-public class Review extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		try {
-			String id = request.getParameter("id");
-			int restaurant_id = 0;
-			if (id != null) {
-				restaurant_id = Integer.parseInt(id);
+			int resId = 0;
+			HttpSession session = req.getSession();
+			if (req.getParameter("id") != null) {
+				resId = Integer.parseInt(req.getParameter("id"));
 			} else {
-				HttpSession session = request.getSession();
-				restaurant_id = (int) session.getAttribute("restaurant_id");
+				resId = Integer.parseInt(session.getAttribute("restaurant_id").toString());
 			}
+			System.out.println("resId" + resId);
 			Dbconnection db = Dbconnection.getInstance();
-
 			Connection con = db.initializeDatabase();
-			String query = "select rev.  from review as rev where res_id=" + restaurant_id + "";
+			String query = "select rev.id,rev.rating, rev.review, usr.name as user_name,usr.email ,usr.profile_pic,rev.time_created from review as rev inner join users as usr on rev.user_id = usr.id inner join restaurant as res on res.id = rev.res_id where res_id="
+					+ resId + "";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			List<models.Review> reviews = new ArrayList<models.Review>();
 			while (rs.next()) {
 				models.Review review = new models.Review();
+				review.setName(rs.getString("user_name"));
+				review.setProfilePic(rs.getString("profile_pic"));
 				review.setId(rs.getInt("id"));
-				review.setResId(rs.getInt("res_id"));
-				review.setUserId(rs.getInt("user_id"));
 				review.setReview(rs.getString("review"));
 				review.setRating(rs.getInt("rating"));
 				review.setDate(rs.getString("time_created"));
+				review.setEmail(rs.getString("email"));
 				reviews.add(review);
 			}
 			String res = new Gson().toJson(reviews.toArray());
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.write(res);
 			con.close();
+			return res;
 		} catch (Exception e) {
 			models.Result res = new models.Result();
 			res.setResult("failure");
 			res.setMessage(e.getMessage());
 			String result = new Gson().toJson(res);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.println(result);
+			return result;
 		}
-
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+	public String addReview(HttpServletRequest request) {
 		try {
 			Dbconnection db = Dbconnection.getInstance();
 
@@ -96,20 +79,40 @@ public class Review extends HttpServlet {
 			res1.setResult("success");
 			res1.setMessage("Review added successfully");
 			String result = new Gson().toJson(res1);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.write(result);
 			con.close();
+			return result;
 		} catch (Exception e) {
 			models.Result res = new models.Result();
 			res.setResult("failure");
 			res.setMessage(e.getMessage());
 			String result = new Gson().toJson(res);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.println(result);
-
+			return result;
 		}
 	}
 
+	public String getReviewAvg(HttpServletRequest req) {
+		try {
+			Connection con = Dbconnection.getInstance().initializeDatabase();
+			HttpSession session = req.getSession();
+			int resId = (int) session.getAttribute("restaurant_id");
+			String query = "select AVG(rating) as rating from review where res_id = ?";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setInt(1, resId);
+			ResultSet rs = stmt.executeQuery();
+			models.Result res = new models.Result();
+			while (rs.next()) {
+				res.setResult("success");
+				res.setMessage(rs.getString("rating"));
+			}
+			String result = new Gson().toJson(res);
+			con.close();
+			return result;
+		} catch (Exception e) {
+			models.Result res = new models.Result();
+			res.setResult("failure");
+			res.setMessage(e.getMessage());
+			String result = new Gson().toJson(res);
+			return result;
+		}
+	}
 }

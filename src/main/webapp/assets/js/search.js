@@ -2,10 +2,23 @@ var searchKeywords = [];
 var food = [];
 var restaurant = [];
 
+url = "../";
+resUrl = "";
+if (
+  window.location.href === "http://localhost:8080/Zoho_Food/" ||
+  window.location.href === "http://localhost:8080/Zoho_Food/index.html"
+) { 
+  url = "";
+  resUrl = "./template/";
+} else {
+  url = "../"
+  resUrl = "./"
+}
+
 function fetchAllFoods() {
   $.ajax({
     method: "GET",
-    url: "../Food?get=1",
+    url: url+"Food/search",
     success: function (data) {
       console.log(data);
       data.forEach((ele) => {
@@ -29,7 +42,7 @@ fetchAllFoods();
 function fetchAllRestaurants() {
   $.ajax({
     method: "GET",
-    url: "../Restaurant",
+    url: url+"Restaurant/forCard",
     success: function (data) {
       data.forEach((ele) => {
         var temp = {
@@ -76,10 +89,10 @@ function renderSearchResult(searchResult) {
   searchResult.forEach((res) => {
     var data;
     if (res.type === "restaurant") {
-        data = `<li><a href="./restaurantFood.html?id=${res.id}"><div class="imgCon"><img src="../assets/images/restaurant.png" alt=""></div>${res.name}</a></li>`
+        data = `<li><a href="${resUrl}restaurantFood.html?id=${res.id}"><div class="imgCon"><img src="${url}assets/images/restaurant.png" alt=""></div>${res.name}</a></li>`
     }
     else if(res.type === "food"){
-        data = `<li><a href="./restaurantFood.html?id=${res.resId}"><div class="imgCon"><img src="../assets/images/food.png" alt=""></div> ${res.name}</a></li>`
+        data = `<li><a href="${resUrl}restaurantFood.html?id=${res.resId}"><div class="imgCon"><img src="${url}assets/images/food.png" alt=""></div> ${res.name}</a></li>`
     }
     searchRes.innerHTML += data;
   });

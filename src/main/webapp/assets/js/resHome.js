@@ -1,7 +1,6 @@
 const name1 = document.getElementById("resName");
 name1.innerHTML = window.localStorage.restaurantName;
 const orderDisplay = document.getElementById("orderDisplay1");
-
 var resOrders;
 function getOrders() {
   $.ajax({
@@ -18,6 +17,14 @@ function getOrders() {
     },
   });
 }
+
+const totOrders = document.getElementById("totOrders");
+
+var totalPrice = 0;
+
+setTimeout(() => {
+  totOrders.innerHTML = resOrders.length;
+}, 800);
 
 getOrders();
 function renderOrder(data) {
@@ -57,11 +64,13 @@ function renderOrder(data) {
       orderObj.totQty += ele2.quantity;
     });
     data1.forEach((ele2) => {
-      orderObj.totPrice += ele2.foodPrice;
+      orderObj.totPrice += (ele2.foodPrice * ele2.quantity);
+      totalPrice += (ele2.foodPrice * ele2.quantity);
     });
     orderDet.push(orderObj);
   }); 
   orderDet.forEach((ele) => {
+
     var foodNames = [];
     var foodNamesString = "";
     data.forEach((ele1) => {
@@ -86,3 +95,47 @@ function refresh() {
 setInterval(() => {
   getOrders();
 }, 10000);
+
+
+//dashboard details
+
+const ratings = document.getElementById("ratings");
+const totPrice = document.getElementById("totPrice");
+var rating = 0;
+function fetchRatings(){
+  $.ajax({
+    url: '../../Review/getReviewCard',
+    method: 'GET',
+    success: (data) => {
+      rating =parseFloat(data.message);
+      console.log(data);
+      ratings.innerHTML = rating.toFixed(1);
+      totPrice.innerHTML = totalPrice;
+
+    },
+    error: (err) => {
+      console.log(err);
+    }
+
+  });
+} 
+
+fetchRatings();
+
+
+const totFood = document.getElementById("totFood");
+
+function fetchFoods(){
+  $.ajax({
+    method: 'GET',
+    url: '../../Food',
+    success: (data) => {
+      totFood.innerHTML = data.length;
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  })
+}
+
+fetchFoods();

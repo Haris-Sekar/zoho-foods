@@ -6,7 +6,7 @@ var resDetails;
 function getFood(id) {
   $.ajax({
     method: "GET",
-    url: "../RestaurantFood?id=" + id,
+    url: "../Restaurant/getRestaurantFood?id=" + id,
     success: function (data) {
       console.log(data);
       food = data.foods;
@@ -44,6 +44,11 @@ function renderResDetails(res) {
     resType = "Veg and Non-Veg";
   }
   const resDet = document.getElementById("resDet");
+  var rating = res.rating;
+    rating = rating.toFixed(1); 
+    var totRating =
+      parseInt(Math.floor(rating)) * 20 +
+      (rating - parseInt(Math.floor(rating))) * 20; 
   const data = `<div class="resDetails">
     <div class="img">
         <img src="../assets/images/res.jpg" alt="">
@@ -55,8 +60,23 @@ function renderResDetails(res) {
     res.resEndTime
   )}</div>
         <div id="resType">${resType}+</div>
-        ${(res.rating == 0)?"":`<div id="ratingCon">
-            <div class="imgCon"><img src="../assets/images/star.png" alt=""></div><div id="ratingText">${res.rating}</div> </div>`}
+        ${(res.rating == 0)?"":` <div class="star-rating" title="${totRating}%">
+        <div class="back-stars">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            
+            <div class="front-stars" style="width: ${totRating}%">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>`}
             
     </div>
   </div>`;
@@ -120,7 +140,7 @@ function decreaseValue(i) {
 
 const cartNo = document.getElementById("cartNo");
 const res_id = id;
-const alert = document.getElementById("alert");
+const alert2 = document.getElementById("alert");
 const alertText = document.getElementById("alertText");
 function addCart(id, i) {
   loadingWrapper.hidden = false;
@@ -137,7 +157,7 @@ function addCart(id, i) {
     success: (data) => {
       console.log(data);
       if(data.result === "failure"){
-        alert.hidden = false;
+        alert2.hidden = false;
         loadingWrapper.hidden = true;
         alertText.innerHTML = "You already have items in cart with different restaurant. Do you want to clear the cart and continue?";
       }
@@ -158,7 +178,7 @@ function addCart(id, i) {
     error: (data) => {
       console.log("err",err.responseText);
       if(data.responseText.result === "failure"){
-        alert.hidden = false;
+        alert2.hidden = false;
         loadingWrapper.hidden = true;
         alertText.innerHTML = "You have already have items in cart with different restaurant. Do you want to clear the cart and continue?";
       }
@@ -193,7 +213,7 @@ getCart();
 function fetchAllReviews(){
   $.ajax({
     method:"GET",
-    url:"../Review?id="+id,
+    url:"../Review/getReview?id="+id,
     success:(data)=>{
       console.log(data);
       // renderReviews(data);
@@ -207,5 +227,5 @@ function fetchAllReviews(){
 fetchAllReviews();
 
 function renderReview(){
-  d
+  
 }

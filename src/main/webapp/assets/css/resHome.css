@@ -11,60 +11,120 @@
 
 
 .restaurantDashboard .liveOrders {
-    margin: 0 5%; 
+    margin: 0 5%;
     height: 600px;
     width: 50%;
     overflow-x: hidden;
     overflow-y: auto;
     border-radius: 10px;
-    background-color: #e5e5e5 ;
+    background-color: #e5e5e5;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 
 }
 
-.restaurantDashboard .liveOrders .title{
-    width: 100%; 
+.restaurantDashboard .liveOrders .title {
+    width: 100%;
     font-size: 30px;
     padding: 2%;
     text-align: center;
-    background-color: #293241;
+    background-color: #EE6C4D;
     color: #fff;
 }
 
-.restaurantDashboard .statistics {
-    margin:  0 5%;
-    border: 2px solid black;
-    width: 50%;
-    height: 600px;
-    background-color: #98C1D9;
 
-}
-
-.order{ 
+.order {
     margin: 2%;
     padding: 3% 1%;
     border-radius: 10px;
-    background-color: #adb5bd;
+    background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
-.order .orderDate{
+.order .orderDate {
     font-size: 15px;
     margin: 0 1%;
 }
 
-.order .orderDet{
+.order .orderDet {
     font-size: 20px;
     margin: 2% 0 2% 5%;
 }
 
-.order .orderQuantity{
+.order .orderQuantity {
     font-size: 18px;
     margin: 0 1%;
 
 }
 
-.order .orderPrice{
+.order .orderPrice {
     font-size: 18px;
     margin: 2% 1%;
+}
+
+.restaurantDashboard .statistics {
+     
+    width: 60%; 
+
+}
+ 
+.restaurantDashboard .statistics .cards{
+    display: flex;
+    margin: 0 0% 10% 0;
+    gap: 5%;
+
+}
+
+.restaurantDashboard .statistics .todayOrder {
+    margin: 0 1%;
+    max-height: 200px;
+    width: 40%;
+    border: 2px solid #EE6C4D;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    background-image: url("../images/order.png");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 100px;
+    background-color: #EE6C4D;
+    transition: 0.3s ease-in-out transform;
+}
+
+.restaurantDashboard .statistics .todayOrder #title {
+    font-size: 30px;
+    padding: 2%;
+    margin: 5% 0 15% 5%;
+    font-weight: 900;
+}
+
+.restaurantDashboard .statistics .todayOrder .number {
+    font-size: 50px;
+    padding: 0 14% 5% 0;
+    font-weight: 900;
+    text-align: end;
+    
+}
+
+.restaurantDashboard .statistics .todayOrder:hover {
+    transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(10deg) rotateY(11deg) rotateZ(0deg) translateX(0px) translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
+}
+
+
+.restaurantDashboard .statistics #review{
+    background-image: url("../images/star\ \(2\).png");
+    background-size: 80px;
+    background-position-x: 10px;
+    background-position-y: 90%;
+}
+.restaurantDashboard .statistics #food{
+    background-image: url("../images/fork.png");
+    background-size: 80px;
+    background-position-x: 10px;
+    background-position-y: 90%;
+}
+.restaurantDashboard .statistics #money{
+    background-image: url("../images/money.png");
+    background-size: 80px;
+    background-position-x: 10px;
+    background-position-y: 90%;
 }

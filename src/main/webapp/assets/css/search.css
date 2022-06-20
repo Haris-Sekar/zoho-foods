@@ -2,10 +2,10 @@
     margin-top:-22px;
     display:none;
     justify-content:center;
- 
 }
 
 .searchRes ul{
+    z-index:10;
     width: 480px;
     border:2px solid #adb5bd;
     margin:0;

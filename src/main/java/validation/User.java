@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import java.sql.*;
 
 @WebServlet("/UserValidation")
-public class UserValidation extends HttpServlet {
+public class User extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

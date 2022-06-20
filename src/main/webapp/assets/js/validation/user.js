@@ -6,9 +6,9 @@ $.ajax({
     },
     success: (data) => {
         console.log(data);
-        if (data.result === 'failure') {
+        if (data.result === 'failure') { 
             window.localStorage.clear();
-            window.location.replace("../index.html");
+            window.location.replace("./login.html");
         }
         else {
             renderProfileImg(data.profilePic);

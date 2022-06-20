@@ -1,0 +1,26 @@
+.front-stars, .back-stars, .star-rating {
+  display: flex;
+}
+
+.star-rating {
+  font-size: 1.7em;
+  /* margin-top: 50px; */
+}
+
+.back-stars {
+  color: #bb5252;
+  position: relative; 
+}
+
+.front-stars {
+  color: #FFBC0B;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s;
+} 
+
+.percent {
+  color: #bb5252;
+  font-size: 1.5em;
+}

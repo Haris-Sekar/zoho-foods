@@ -1,6 +1,6 @@
 package models;
 
-public class Restaurant {
+public class RestaurantModel {
     String name;
     String email;
     String phone;
@@ -16,6 +16,24 @@ public class Restaurant {
     int id;
     int foodCount;
     float rating;
+    String image;
+    Boolean isActive;
+
+    public Boolean getIsActive() {
+        return this.isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public float getRating() {
         return this.rating;

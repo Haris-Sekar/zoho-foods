@@ -60,7 +60,7 @@ table td .imgCon img{
     border-radius: 50%;
 }
 
-input[type=text],input[type=email],input[type=number],input[type=password]{
+input[type=text],input[type=email],input[type=number],input[type=password],input[type=time]{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -102,8 +102,7 @@ input[type="file"] {
     border-radius:10px;
     background-color:#EE6C4D;    
     color:#fff;
-    cursor:not-allowed;
-    opacity: 0.5;
+    cursor:pointer; 
     transition:0.3s ease-in-out;
 }
 
